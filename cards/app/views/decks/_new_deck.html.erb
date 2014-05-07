@@ -1,0 +1,38 @@
+<%= form_for @deck do |deck| %>
+  <% if @deck.errors.any? %>
+    <div class="alert">
+      <%= pluralize(@deck.errors.count, "error") %> Deck not saved.
+      <ul>
+        <% @deck.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %><br>
+
+  <table>
+    <tr>
+      <th>
+      <%= deck.label :"Deck Name" %>
+      </th>
+      <td>
+        <%= deck.text_field :name %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <%= deck.label :"Deck Type" %>
+      </th>
+      <td>
+        <%= deck.text_field :deck_type %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+      </th>
+      <td>
+        <%= deck.submit "Save" %><br>
+      </td>
+    </tr>
+  </table>
+<% end %>

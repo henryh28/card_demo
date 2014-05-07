@@ -1,0 +1,18 @@
+<p><div class="heading">Deck list page</div></p>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+  </tr>
+
+  <% @decks.each do |deck| %>
+  <tr>
+    <td><%= deck.name %></td>
+    <td><%= deck.type %></td>
+  </tr>
+  <% end %>
+</table>
+
+<br>
+<%= link_to "Home", root_path %>
