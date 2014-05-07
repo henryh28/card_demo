@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(:version => 20140507002533) do
 
   create_table "cards", :force => true do |t|
-    t.string   "type"
+    t.string   "card_type"
     t.string   "effect"
     t.integer  "modifier"
     t.datetime "created_at", :null => false
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20140507002533) do
 
   create_table "decks", :force => true do |t|
     t.string "name"
-    t.string "type"
+    t.string "deck_type"
   end
 
 end
