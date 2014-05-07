@@ -1,4 +1,4 @@
 class Card < ActiveRecord::Base
-  attr_accessible :type
-  belongs_to :user
+  attr_accessible :type, :effect, :modifier
+  belongs_to :deck
 end
