@@ -15,14 +15,15 @@ ActiveRecord::Schema.define(:version => 20140507002533) do
 
   create_table "cards", :force => true do |t|
     t.string   "type"
+    t.string   "effect"
+    t.integer  "modifier"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  create_table "users", :force => true do |t|
-    t.string  "name"
-    t.string  "type"
-    t.integer "cards_remaining"
+  create_table "decks", :force => true do |t|
+    t.string "name"
+    t.string "type"
   end
 
 end
