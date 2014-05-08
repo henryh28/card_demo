@@ -5,6 +5,8 @@ class CreateCards < ActiveRecord::Migration
       t.string :effect
       t.integer :modifier
 
+      t.belongs_to :deck, index: true
+
       t.timestamps
     end
   end

@@ -8,8 +8,12 @@
 
   <% @decks.each do |deck| %>
   <tr>
-    <td><%= link_to deck.name, edit_deck_path(deck) %></td>
+    <td><%= deck.name %></td>
     <td><%= deck.deck_type %></td>
+    <td><%= link_to "Show", deck_path(deck) %></td>
+    <td><%= link_to "Edit", edit_deck_path(deck) %></td>
+    <td><%= link_to "Delete", deck_path(deck), method: :delete, data: { confirm: "Confirm deletion?" } %></td>
+
   </tr>
   <% end %>
 </table>
