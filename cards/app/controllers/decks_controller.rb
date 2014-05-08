@@ -38,5 +38,10 @@ class DecksController < ApplicationController
     @deck = Deck.find(params[:id])
   end
 
+  def destroy
+    @deck = Deck.find(params[:id])
+    @deck.destroy
+    redirect_to root_path
+  end
 
 end
