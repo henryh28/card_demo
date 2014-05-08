@@ -11,7 +11,7 @@ class DecksController < ApplicationController
   def create
     @deck = Deck.new(params[:deck])
     if @deck.save
-      redirect_to @deck
+      redirect_to action: "index"
     else
       render 'new'
     end
@@ -20,5 +20,23 @@ class DecksController < ApplicationController
   def show
     @deck = Deck.find(params[:id])
   end
+
+  def edit
+    @deck = Deck.find(params[:id])
+  end
+
+  def update
+    @deck = Deck.find(params[:id])
+    if @deck.update_attributes(params[:deck])
+      redirect_to @deck
+    else
+      render "edit"
+    end
+  end
+
+  def show
+    @deck = Deck.find(params[:id])
+  end
+
 
 end

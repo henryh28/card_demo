@@ -8,8 +8,8 @@
 
   <% @decks.each do |deck| %>
   <tr>
-    <td><%= deck.name %></td>
-    <td><%= deck.type %></td>
+    <td><%= link_to deck.name, edit_deck_path(deck) %></td>
+    <td><%= deck.deck_type %></td>
   </tr>
   <% end %>
 </table>
