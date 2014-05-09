@@ -3,7 +3,7 @@ class CreateCards < ActiveRecord::Migration
     create_table :cards do |t|
       t.string :card_type
       t.string :effect
-      t.integer :modifier
+      t.string :modifier
 
       t.belongs_to :deck, index: true
 

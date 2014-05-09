@@ -1,0 +1,19 @@
+<%= form_for ([@deck, @deck.cards.build]) do |card| %>
+  <table>
+    <tr>
+      <th><%= card.label :"card type" %>:</th>
+      <td><%= card.text_field :card_type %></td>
+    </tr>
+    <tr>
+      <th><%= card.label :effect %>:</th>
+      <td><%= card.text_field :effect %></td>
+    </tr>
+    <tr>
+      <th><%= card.label :modifier %>:</th>
+      <td><%= card.text_field :modifier %></td>
+    </tr>
+    <tr>
+      <th></th>
+      <td><%= card.submit "Create Card" %></td>
+  </table>
+<% end %>

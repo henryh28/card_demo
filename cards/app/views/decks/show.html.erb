@@ -1,6 +1,20 @@
-<div class="heading">Deck details</div>
+<div class="heading">Deck details</div><br>
 
 Name: <%= @deck.name %><br>
 Type: <%= @deck.deck_type %><br>
 
-<%= link_to "Home", root_path %>
+<br>
+Cards: <%= link_to "Create", new_deck_card_path(@deck), :fantas => params[:id] %>
+
+<div class="card_list">
+  <% cards = @deck.cards %>
+  <% cards.each do |card| %>
+    <p>
+      <%= card.card_type %><br>
+      <%= card.effect %><br>
+      <%= card.modifier %><br>
+    </p>
+  <% end %>
+</div>
+
+<br><%= link_to "Home", root_path %>
