@@ -8,13 +8,20 @@ Cards: <%= link_to "Create", new_deck_card_path(@deck), :fantas => params[:id] %
 
 <div class="card_list">
   <% cards = @deck.cards %>
-  <% cards.each do |card| %>
-    <p>
-      <%= card.card_type %><br>
-      <%= card.effect %><br>
-      <%= card.modifier %><br>
-    </p>
-  <% end %>
+  <table>
+    <tr>
+      <th>Card Type</th>
+      <th>Effect</th>
+      <th>Modifiers</th>
+    </tr>
+    <% cards.each do |card| %>
+      <tr>
+        <td><%= link_to card.card_type, edit_deck_card_path(@deck.id, card) %></td>
+        <td><%= card.effect %></td>
+        <td><%= card.modifier %></td>
+      </tr>
+    <% end %>
+  </table>
 </div>
 
 <br><%= link_to "Home", root_path %>
