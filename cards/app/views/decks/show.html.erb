@@ -10,15 +10,19 @@ Cards: <%= link_to "Create", new_deck_card_path(@deck), :fantas => params[:id] %
   <% cards = @deck.cards %>
   <table>
     <tr>
+      <th>ID</th>
       <th>Card Type</th>
       <th>Effect</th>
       <th>Modifiers</th>
+      <th>Action</th>
     </tr>
     <% cards.each do |card| %>
       <tr>
+        <td><%= card.id %></td>
         <td><%= link_to card.card_type, edit_deck_card_path(@deck.id, card) %></td>
         <td><%= card.effect %></td>
         <td><%= card.modifier %></td>
+        <td><%= link_to "Delete", deck_card_path(@deck, card), method: :delete, data: { confirm: "Confirm card deletion?" } %></td>
       </tr>
     <% end %>
   </table>
