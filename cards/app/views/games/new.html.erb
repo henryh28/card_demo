@@ -1,0 +1,10 @@
+<div class="heading">Game start</div><br>
+
+<div class="game_area">
+  <% @player_deck.cards.each do |card| %>
+    <%= card.card_type %><br>
+  <% end %>
+</div>
+
+
+<%= link_to "Home", root_path %>
