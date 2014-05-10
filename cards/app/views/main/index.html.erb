@@ -2,17 +2,25 @@
 
 <p><div class="heading">Main admin page</div></p>
 
-<div class="menu">
-  Decks menu: <br>
+<fieldset class="menu">
+  <legend>Decks menu:</legend>
     <ul>
       <li><%= link_to "List decks", decks_path %></li>
       <li><%= link_to "Create decks", new_deck_path %></li>
     </ul>
-</div>
+</fieldset><br>
 
+<fieldset class="menu">
+  <legend>Options:</legend>
+    <ul>
+      <li><%= link_to "Start Game", new_deck_path %></li>
+    </ul>
+</fieldset>
 
 
 
 <div class="footer">
-Work in progress by Henry Hsu. Last update 5/7/2014
+Work in progress by Henry Hsu. Last update 5/10/2014
 </div>
+
+

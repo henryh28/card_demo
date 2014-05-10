@@ -1,4 +1,4 @@
-<%= form_for ([@deck, @deck.cards.build]) do |card| %>
+<%= form_for ([@deck, card]) do |card| %>
   <table>
     <tr>
       <th><%= card.label :"card type" %>:</th>
