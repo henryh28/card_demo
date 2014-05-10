@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140507002533) do
+ActiveRecord::Schema.define(:version => 20140510182050) do
 
   create_table "cards", :force => true do |t|
     t.string   "card_type"
@@ -25,6 +25,10 @@ ActiveRecord::Schema.define(:version => 20140507002533) do
   create_table "decks", :force => true do |t|
     t.string "name"
     t.string "deck_type"
+  end
+
+  create_table "games", :force => true do |t|
+    t.string "name"
   end
 
 end

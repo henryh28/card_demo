@@ -4,7 +4,7 @@ Name: <%= @deck.name %><br>
 Type: <%= @deck.deck_type %><br>
 
 <br>
-Cards: <%= link_to "Create", new_deck_card_path(@deck), :fantas => params[:id] %>
+Cards: <%= link_to "Create", new_deck_card_path(@deck)%>
 
 <div class="card_list">
   <% cards = @deck.cards %>
