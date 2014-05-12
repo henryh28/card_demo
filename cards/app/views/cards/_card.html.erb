@@ -13,6 +13,10 @@
       <td><%= card.text_field :modifier %></td>
     </tr>
     <tr>
+      <th><%= card.label :"flavor text" %>:</th>
+      <td><%= card.text_field :flavor_text %></td>
+    </tr>
+    <tr>
       <th></th>
       <td><%= card.submit "Save Card" %></td>
   </table>

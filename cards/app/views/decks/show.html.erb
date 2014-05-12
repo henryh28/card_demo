@@ -7,13 +7,14 @@ Type: <%= @deck.deck_type %><br>
 Cards: <%= link_to "Create", new_deck_card_path(@deck)%>
 
 <div class="card_list">
-  <% cards = @deck.cards %>
+  <% cards = @deck.cards.order(:card_type).order(:effect).order(:modifier) %>
   <table>
     <tr>
       <th>ID</th>
       <th>Card Type</th>
       <th>Effect</th>
       <th>Modifiers</th>
+      <th>Flavor Text</th>
       <th>Action</th>
     </tr>
     <% cards.each do |card| %>
@@ -22,6 +23,7 @@ Cards: <%= link_to "Create", new_deck_card_path(@deck)%>
         <td><%= link_to card.card_type, edit_deck_card_path(@deck.id, card) %></td>
         <td><%= card.effect %></td>
         <td><%= card.modifier %></td>
+        <td><%= card.flavor_text %></td>
         <td><%= link_to "Delete", deck_card_path(@deck, card), method: :delete, data: { confirm: "Confirm card deletion?" } %></td>
       </tr>
     <% end %>
