@@ -4,6 +4,7 @@ class CreateCards < ActiveRecord::Migration
       t.string :card_type
       t.string :effect
       t.string :modifier
+      t.string :flavor_text
 
       t.belongs_to :deck, index: true
 

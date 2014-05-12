@@ -17,9 +17,10 @@ ActiveRecord::Schema.define(:version => 20140510182050) do
     t.string   "card_type"
     t.string   "effect"
     t.string   "modifier"
+    t.string   "flavor_text"
     t.integer  "deck_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "decks", :force => true do |t|

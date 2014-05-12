@@ -1,10 +1,15 @@
 <div class="heading">Game start</div><br>
 
 <div class="game_area">
-  <% @player_deck.cards.each do |card| %>
-    <%= card.card_type %><br>
+  <% @player_hand.each do |card| %>
+    <div class="card">
+      <div class="card_type"><%= card.card_type %></div><br>
+      <div class="card_effect"><%= card.effect %></div><br>
+      <div class="card_modifier"><%= card.modifier %></div><br>
+      <div class="card_flavor_text">"<%= card.flavor_text %>"</div>
+    </div>
   <% end %>
 </div>
 
 
-<%= link_to "Home", root_path %>
+<br><%= link_to "Home", root_path %>

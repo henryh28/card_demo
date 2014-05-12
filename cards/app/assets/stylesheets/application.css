@@ -56,3 +56,37 @@ th {
 td {
   border: 1px solid black;
 }
+
+.game_area{
+  border: 3px solid cornflowerblue;
+  padding: 25px;
+
+}
+.card {
+  display: inline-block;
+  border: 1px solid lightslategray;
+  background-color: ivory;
+  border-radius: 15px;
+  width: 100px;
+  height: 150px;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.card_type {
+  color: red;
+}
+
+.card_effect {
+  color: forestgreen;
+}
+
+.card_modifier {
+  color: palevioletred;
+}
+
+.card_flavor_text {
+  color: steelblue;
+}
