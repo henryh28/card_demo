@@ -5,11 +5,26 @@
     <div class="card">
       <div class="card_type"><%= card.card_type %></div><br>
       <div class="card_effect"><%= card.effect %></div><br>
-      <div class="card_modifier"><%= card.modifier %></div><br>
-      <div class="card_flavor_text">"<%= card.flavor_text %>"</div>
+      <div class="card_modifier"><%= card.modifier %></div>
+      <div class="card_flavor_text">"<%= card.flavor_text %>"<br>
+      <%= card.inspect %>
+      </div>
     </div>
   <% end %>
-</div>
+</div><br>
 
 
-<br><%= link_to "Home", root_path %>
+<fieldset>
+  <legend>Player Details</legend>
+    Deck size: <%= @player_deck.cards.count %><br>
+    Action: <%= @round_stats.action %><br>
+    Buy: <%= @round_stats.buy %><br>
+    Credit: <%= @round_stats.credit %><br>
+    Discard:
+</fieldset>
+<%= link_to "Play hand", games_play_path(:discard => @player_discard, :hand => @player_hand, :deck => @player_deck), method: :post %><br>
+
+
+
+<%= link_to "Home", root_path %><br>
+<%= @player_hand[0].id %>
