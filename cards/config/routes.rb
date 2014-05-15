@@ -5,5 +5,7 @@ Cards::Application.routes.draw do
     resources :cards
   end
 
-  resources :games
+  get "games/new", :to => "games#new"
+  post "games/play", :to => "games#play"
+
 end
