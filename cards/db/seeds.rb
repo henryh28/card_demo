@@ -20,4 +20,8 @@ starting.cards.create(card_type: "combat", effect: "attack", modifier: "1", flav
 starting.cards.create(card_type: "combat", effect: "attack", modifier: "1", flavor_text: "Lasers!  pew pew!")
 starting.cards.create(card_type: "combat", effect: "defense", modifier: "1", flavor_text: "Shields up!")
 starting.cards.create(card_type: "combat", effect: "defense", modifier: "1", flavor_text: "Shields up!")
+starting.cards.create(card_type: "resource", effect: "energy", modifier: "1", flavor_text: "Danged rusty engines")
+starting.cards.create(card_type: "resource", effect: "energy", modifier: "1", flavor_text: "Danged rusty engines")
+starting.cards.create(card_type: "resource", effect: "energy", modifier: "2", flavor_text: "I think it's working!")
+starting.cards.create(card_type: "resource", effect: "energy", modifier: "3", flavor_text: "How'd it do that?!")
 

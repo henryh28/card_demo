@@ -4,6 +4,7 @@ class CreateRounds < ActiveRecord::Migration
         t.integer :buy
         t.integer :action
         t.integer :credit
+        t.integer :energy
 
       t.timestamps
     end

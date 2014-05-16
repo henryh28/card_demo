@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20140514223007) do
     t.integer  "buy"
     t.integer  "action"
     t.integer  "credit"
+    t.integer  "energy"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
