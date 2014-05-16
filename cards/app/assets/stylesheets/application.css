@@ -90,3 +90,15 @@ td {
 .card_flavor_text {
   color: steelblue;
 }
+
+.round_details {
+  color: red;
+  margin-top: 25px;
+  width: 50%;
+  margin-left: 20%;
+}
+
+legend {
+  font-weight: bold;
+  font-size: 20px;
+}
