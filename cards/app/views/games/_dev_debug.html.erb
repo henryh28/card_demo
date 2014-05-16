@@ -1,0 +1,15 @@
+<fieldset class="menu">
+  <legend>Developer Details</legend>
+  hand:
+  <% @player_hand.each do |card| %>
+    <%= card.id %>,
+  <% end %><br>
+  deck:
+  <% @player_deck.each do |card| %>
+    <%= card.id %>,
+  <% end %><br>
+  discard:
+  <% @player_discard.each do |card| %>
+    <%= card.id %>,
+  <% end %><br>
+</fieldset>

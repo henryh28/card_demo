@@ -92,10 +92,15 @@ td {
 }
 
 .round_details {
-  color: red;
+  color: orchid;
   margin-top: 25px;
-  width: 50%;
-  margin-left: 20%;
+  width: 70%;
+  margin-left: 10%;
+}
+
+.round_details th {
+  padding: 5px;
+  background-color: aliceblue;
 }
 
 legend {
