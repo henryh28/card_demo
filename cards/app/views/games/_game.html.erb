@@ -1,0 +1,40 @@
+<fieldset class="game_area">
+  <legend>Player Hand</legend>
+  <% @player_hand.each do |card| %>
+    <div class="card">
+      <div class="card_type"><%= card.card_type %></div><br>
+      <div class="card_effect"><%= card.effect %></div><br>
+      <div class="card_modifier"><%= card.modifier %></div>
+      <div class="card_flavor_text">"<%= card.flavor_text %>"<br>
+      </div>
+    </div>
+  <% end %><br>
+  <div class="round_details">
+    <% tally_resources %>
+    <table>
+      <tr>
+        <th>
+          Draw pile: <%= @player_deck.count %>
+        </td>
+        <th>
+          Discard: <%= @player_discard.count %>
+        </th>
+        <th>
+          Action: <%= @round_stats.action %>
+        </th>
+        <th>
+          Buy: <%= @round_stats.buy %>
+        </th>
+        <th>
+          Credit: <%= @round_stats.credit %>
+        </th>
+        <th>
+          Energy: <%= @round_stats.energy %>
+        </th>
+      </tr>
+    </table>
+  </div>
+</fieldset><br>
+
+<%= link_to "Play hand", games_play_path(:discard => @player_discard, :hand => @player_hand, :deck => @player_deck), method: :post %><br>
+
