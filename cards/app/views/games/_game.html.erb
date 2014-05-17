@@ -1,3 +1,30 @@
+<fieldset class="event_area">
+  <legend>Game Events</legend>
+  <% @event_hand.each do |card| %>
+    <div class="card">
+      <div class="card_type"><%= card.card_type %></div><br>
+      <div class="card_effect"><%= card.effect %></div><br>
+      <div class="card_modifier"><%= card.modifier %></div><br>
+      <div class="card_flavor_text">"<%= card.flavor_text %>"</div><br>
+    </div>
+  <% end %>
+</fieldset>
+
+
+<fieldset class="buy_area">
+  <legend>Buy Area</legend>
+  <% @buy_hand.each do |card| %>
+    <div class="card">
+      <div class="card_type"><%= card.card_type %></div>
+      <div class="card_effect"><%= card.effect %></div>
+      <div class="card_modifier"><%= card.modifier %></div><br>
+      <div class="card_flavor_text">"<%= card.flavor_text %>"</div><br>
+      <div class="card_cost">Cost: <%= card.cost %></div>
+    </div>
+  <% end %>
+</fieldset><br>
+
+
 <fieldset class="game_area">
   <legend>Player Hand</legend>
   <% @player_hand.each do |card| %>
@@ -5,36 +32,24 @@
       <div class="card_type"><%= card.card_type %></div><br>
       <div class="card_effect"><%= card.effect %></div><br>
       <div class="card_modifier"><%= card.modifier %></div><br>
-      <div class="card_flavor_text">"<%= card.flavor_text %>"<br>
-      </div>
+      <div class="card_flavor_text">"<%= card.flavor_text %>"</div><br>
     </div>
   <% end %><br>
+
   <div class="round_details">
     <% tally_resources %>
     <table>
       <tr>
-        <th>
-          Draw pile: <%= @player_deck.count %>
-        </td>
-        <th>
-          Discard: <%= @player_discard.count %>
-        </th>
-        <th>
-          Action: <%= @round_stats.action %>
-        </th>
-        <th>
-          Buy: <%= @round_stats.buy %>
-        </th>
-        <th>
-          Credit: <%= @round_stats.credit %>
-        </th>
-        <th>
-          Energy: <%= @round_stats.energy %>
-        </th>
+        <th>Draw pile: <%= @player_deck.count %></th>
+        <th>Discard: <%= @player_discard.count %></th>
+        <th>Action: <%= @round_stats.action %></th>
+        <th>Buy: <%= @round_stats.buy %></th>
+        <th>Credit: <%= @round_stats.credit %></th>
+        <th>Energy: <%= @round_stats.energy %></th>
       </tr>
     </table>
   </div>
 </fieldset><br>
 
-<%= link_to "Play hand", games_play_path(:discard => @player_discard, :hand => @player_hand, :deck => @player_deck), method: :post %><br>
+<%= link_to "Play hand", games_play_path(:player_discard => @player_discard, :player_hand => @player_hand, :player_deck => @player_deck, :event_deck => @event_deck, :event_hand => @event_hand, :buy_deck => @buy_deck, buy_hand: @buy_hand), method: :post %><br>
 

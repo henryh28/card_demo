@@ -57,22 +57,40 @@ td {
   border: 1px solid black;
 }
 
-.game_area{
+.game_area {
+  clear: both;
   border: 3px solid cornflowerblue;
   padding: 25px;
-
 }
+
+.event_area {
+  border: 3px solid cornflowerblue;
+  padding: 25px;
+  width: 40%;
+  float: left;
+}
+
+.buy_area {
+  border: 3px solid cornflowerblue;
+  padding: 25px;
+  width: 40%;
+  float: right;
+}
+
 .card {
   display: inline-block;
+  position: relative;
   border: 1px solid lightslategray;
   background-color: ivory;
   border-radius: 15px;
-  width: 100px;
-  height: 150px;
+  width: 80px;
+  height: 135px;
   padding: 10px;
   text-align: center;
   font-weight: bold;
   overflow: hidden;
+  float: left;
+  margin-left: 5px;
 }
 
 .card_type {
@@ -90,6 +108,11 @@ td {
 .card_flavor_text {
   color: steelblue;
   font-size: 65%;
+}
+
+.card_cost {
+  position: absolute;
+  bottom: 5px;
 }
 
 .round_details {
