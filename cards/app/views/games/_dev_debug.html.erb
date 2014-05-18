@@ -1,15 +1,29 @@
 <fieldset class="menu">
   <legend>Developer Details</legend>
   hand:
-  <% @player_hand.each do |card| %>
+  <% session[:player_hand].each do |card| %>
     <%= card.id %>,
   <% end %><br>
   deck:
-  <% @player_deck.each do |card| %>
+  <% session[:player_deck].each do |card| %>
     <%= card.id %>,
   <% end %><br>
   discard:
-  <% @player_discard.each do |card| %>
+  <% session[:player_discard].each do |card| %>
     <%= card.id %>,
   <% end %><br>
+  ---------------------------------------<br>
+  event hand:
+  <% session[:event_hand].each do |card| %>
+    <%= card.id %>,
+  <% end %><br>
+  event deck:
+  <% session[:event_deck].each do |card| %>
+    <%= card.id %>,
+  <% end %><br>
+  event discard:
+  <% session[:event_discard].each do |card| %>
+    <%= card.id %>,
+  <% end %><br>
+  =======================================<br>
 </fieldset>
