@@ -1,6 +1,6 @@
 <fieldset class="event_area">
   <legend>Game Events</legend>
-  <% @event_hand.each do |card| %>
+  <% session[:event_hand].each do |card| %>
     <div class="card">
       <div class="card_type"><%= card.card_type %></div><br>
       <div class="card_effect"><%= card.effect %></div><br>
@@ -13,7 +13,7 @@
 
 <fieldset class="buy_area">
   <legend>Buy Area</legend>
-  <% @buy_hand.each do |card| %>
+  <% session[:buy_hand].each do |card| %>
     <div class="card">
       <div class="card_type"><%= card.card_type %></div>
       <div class="card_effect"><%= card.effect %></div>
@@ -27,7 +27,7 @@
 
 <fieldset class="game_area">
   <legend>Player Hand</legend>
-  <% @player_hand.each do |card| %>
+  <% session[:player_hand].each do |card| %>
     <div class="card">
       <div class="card_type"><%= card.card_type %></div><br>
       <div class="card_effect"><%= card.effect %></div><br>
@@ -40,16 +40,19 @@
     <% tally_resources %>
     <table>
       <tr>
-        <th>Draw pile: <%= @player_deck.count %></th>
-        <th>Discard: <%= @player_discard.count %></th>
+        <th>Draw pile: <%= session[:player_deck].size %></th>
+        <th>Discard: <%= session[:player_discard].size %></th>
         <th>Action: <%= @round_stats.action %></th>
         <th>Buy: <%= @round_stats.buy %></th>
         <th>Credit: <%= @round_stats.credit %></th>
         <th>Energy: <%= @round_stats.energy %></th>
+        <th>Attack: <%= @round_stats.attack %></th>
+        <th>Defense: <%= @round_stats.defense %></th>
+        <th>Hull: <%= session[:hull] %></th>
       </tr>
     </table>
   </div>
 </fieldset><br>
 
-<%= link_to "Play hand", games_play_path(:player_discard => @player_discard, :player_hand => @player_hand, :player_deck => @player_deck, :event_deck => @event_deck, :event_hand => @event_hand, :buy_deck => @buy_deck, buy_hand: @buy_hand), method: :post %><br>
+<%= link_to "Play hand", games_play_path, method: :post %>
 
