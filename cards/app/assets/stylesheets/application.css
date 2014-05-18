@@ -89,7 +89,6 @@ td {
   text-align: center;
   font-weight: bold;
   overflow: hidden;
-  float: left;
   margin-left: 5px;
 }
 
@@ -117,7 +116,6 @@ td {
 
 .round_details {
   color: orchid;
-  margin-top: 25px;
   width: 70%;
   margin-left: 10%;
 }
@@ -127,7 +125,24 @@ td {
   background-color: aliceblue;
 }
 
+.resource_hud {
+  color: darkseagreen;
+  width: 70%;
+  margin-left: 10%;
+}
+
+.resource_hud th {
+  background-color: lightslategray;
+  padding: 10px;
+}
+
+.player_hand {
+  text-align: center;
+}
+
 legend {
   font-weight: bold;
   font-size: 20px;
 }
+
+

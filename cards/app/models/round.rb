@@ -1,3 +1,3 @@
 class Round < ActiveRecord::Base
-  attr_accessible :buy, :action, :credit, :energy, :attack, :defense
+  attr_accessible :credit, :energy, :attack, :shield
 end

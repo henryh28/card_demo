@@ -27,14 +27,16 @@
 
 <fieldset class="game_area">
   <legend>Player Hand</legend>
-  <% session[:player_hand].each do |card| %>
-    <div class="card">
-      <div class="card_type"><%= card.card_type %></div><br>
-      <div class="card_effect"><%= card.effect %></div><br>
-      <div class="card_modifier"><%= card.modifier %></div><br>
-      <div class="card_flavor_text">"<%= card.flavor_text %>"</div><br>
-    </div>
-  <% end %><br>
+  <div class="player_hand">
+    <% session[:player_hand].each do |card| %>
+      <div class="card">
+        <div class="card_type"><%= card.card_type %></div><br>
+        <div class="card_effect"><%= card.effect %></div><br>
+        <div class="card_modifier"><%= card.modifier %></div><br>
+        <div class="card_flavor_text">"<%= card.flavor_text %>"</div><br>
+      </div>
+    <% end %>
+  </div><br>
 
   <div class="round_details">
     <% tally_resources %>
@@ -42,17 +44,28 @@
       <tr>
         <th>Draw pile: <%= session[:player_deck].size %></th>
         <th>Discard: <%= session[:player_discard].size %></th>
-        <th>Action: <%= @round_stats.action %></th>
-        <th>Buy: <%= @round_stats.buy %></th>
-        <th>Credit: <%= @round_stats.credit %></th>
-        <th>Energy: <%= @round_stats.energy %></th>
         <th>Attack: <%= @round_stats.attack %></th>
-        <th>Defense: <%= @round_stats.defense %></th>
-        <th>Hull: <%= session[:hull] %></th>
+        <th>Shield: <%= @round_stats.shield %></th>
+        <th>Energy: <%= @round_stats.energy %></th>
+        <th>Credit: <%= @round_stats.credit %></th>
+      </tr>
+    </table>
+  </div><br>
+
+  <div class="resource_hud">
+    <table>
+      <tr>
+        <th>Hull Strength: <%= session[:hull] %></th>
+        <th>Shield Strength: <%= session[:shield] %></th>
+        <th>Energy Reserves: <%= session[:energy] %></th>
+        <th>Credit: <%= session[:credit] %></th>
       </tr>
     </table>
   </div>
 </fieldset><br>
 
-<%= link_to "Play hand", games_play_path, method: :post %>
-
+<% if check_game_over? %>
+  <%= link_to "Game over", root_path %>
+<% else %>
+  <%= link_to "Play hand", games_play_path, method: :post %>
+<% end %>

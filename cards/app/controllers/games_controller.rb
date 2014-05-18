@@ -16,6 +16,9 @@ class GamesController < ApplicationController
 
     @round_stats = Round.new
     session[:hull] = 10
+    session[:shield] = 0
+    session[:energy] = 0
+    session[:credit] = 0
   end
 
   def play
