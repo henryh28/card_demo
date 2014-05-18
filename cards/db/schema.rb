@@ -34,12 +34,10 @@ ActiveRecord::Schema.define(:version => 20140518162748) do
   end
 
   create_table "rounds", :force => true do |t|
-    t.integer  "buy",        :default => 0
-    t.integer  "action",     :default => 0
     t.integer  "credit",     :default => 0
     t.integer  "energy",     :default => 0
     t.integer  "attack",     :default => 0
-    t.integer  "defense",    :default => 0
+    t.integer  "shield",     :default => 0
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
