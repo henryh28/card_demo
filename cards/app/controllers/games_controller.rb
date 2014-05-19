@@ -1,6 +1,5 @@
 class GamesController < ApplicationController
 
-
   def new
     session[:player_discard] = Array.new
     session[:player_deck] = Deck.find_by_name("starting").cards.shuffle!
@@ -19,6 +18,7 @@ class GamesController < ApplicationController
     session[:shield] = 0
     session[:energy] = 0
     session[:credit] = 0
+    render "play"
   end
 
   def play
@@ -30,6 +30,5 @@ class GamesController < ApplicationController
     @round_stats = Round.new
     refresh_buy_deck?
   end
-
 
 end
