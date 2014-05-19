@@ -1,0 +1,16 @@
+<fieldset class="buy_area">
+  <legend>Buy Area</legend>
+  <% session[:buy_hand].each do |card| %>
+    <div class="card">
+      <div class="card_type"><%= card.card_type %></div>
+      <div class="card_effect"><%= card.effect %></div>
+      <div class="card_modifier"><%= card.modifier %></div><br>
+      <div class="card_flavor_text">"<%= card.flavor_text %>"</div><br>
+      <div class="card_cost">Cost: <%= card.cost %></div>
+      <script type="text/javascript">
+        var cost = <%= card.cost.to_i %>
+        var credit = <%= session[:credit].to_i %>
+      </script>
+    </div>
+  <% end %>
+</fieldset>
