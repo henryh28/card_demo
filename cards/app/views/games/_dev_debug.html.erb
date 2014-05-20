@@ -1,5 +1,7 @@
-<fieldset class="menu">
+<fieldset class="debug">
   <legend>Developer Details</legend>
+  system notices: <%= flash[:notice] %><br>
+  ---------------------------------------<br>
   hand:
   <% session[:player_hand].each do |card| %>
     <%= card.id %>,
@@ -25,5 +27,15 @@
   <% session[:event_discard].each do |card| %>
     <%= card.id %>,
   <% end %><br>
+  ---------------------------------------<br>
+  buy hand:
+  <% session[:buy_hand].each do |card| %>
+    <%= card.id %>,
+  <% end %><br>
+  buy deck:
+  <% session[:buy_deck].each do |card| %>
+    <%= card.id %>,
+  <% end %><br>
   =======================================<br>
+
 </fieldset>

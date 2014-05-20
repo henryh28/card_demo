@@ -31,4 +31,19 @@ class GamesController < ApplicationController
     refresh_buy_deck?
   end
 
+  def buy
+    buy_card = Card.find(params[:card])
+    if buy_card.cost.to_i > session[:credit]
+      flash[:notice] = "not enough cash. buy cancelled"
+    else
+      session[:credit] -= buy_card.cost.to_i
+      flash[:notice] = "bought card"
+      session[:player_discard].push session[:buy_hand].delete(Card.find(params[:card]))
+    end
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
 end

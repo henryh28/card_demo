@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 
 function bindEvent(){
-  $('.card').click(function(event){
+  $('.buyable_cards').click(function(event){
     event.preventDefault()
     testFunction(this);
   });
@@ -12,7 +12,12 @@ function bindEvent(){
 
 
 function testFunction(card) {
-  console.log(card)
-  console.log(this.credit > this.cost);
+  // console.log(card)
+  var cardId = $(card).find("#card_id").val()
+  $.ajax({
+    url: '/games/buy',
+    type: 'get',
+    data: {card: cardId }
+  })
 };
 
