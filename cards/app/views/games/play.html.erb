@@ -2,14 +2,8 @@
 <%= render "buy_deck" %>
 <%= render "player_area" %>
 
+<%= link_to "Play hand", games_play_path, method: :post, :class => "link_button" %>
 
-<% if check_game_over? %>
-  <%= link_to "Game over", root_path %>
-<% else %>
-  <%= link_to "Play hand", games_play_path, method: :post %>
-<% end %>
+<%= link_to "Home", root_path, class: "link_button" %>
 
-
-<%= link_to "Home", root_path %><br>
-
-<%= render "dev_debug" %>
+<%= render "event_summary" %>
