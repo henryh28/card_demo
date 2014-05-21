@@ -2,3 +2,4 @@ console.log("updating partials")
 $('.buy_area').replaceWith('<%= escape_javascript(render(:partial => 'buy_deck', :locals => { :tester => "woohoo"})) %>' )
 $('.resource_hud').replaceWith('<%= escape_javascript(render(:partial => 'resource_hud', :locals => { :tester => "woohoo"})) %>' )
 $('.debug').replaceWith('<%= escape_javascript(render(:partial => 'dev_debug', :locals => { :tester => "woohoo"})) %>' )
+  bindEvent();

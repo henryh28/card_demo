@@ -10,8 +10,15 @@ module ApplicationHelper
     end
   end
 
-  def check_game_over?
-    session[:hull] < 1
+
+  def event_tally
+    session[:event_hand].each do |card|
+      if card.effect == "energy" || card.effect == "credit"
+        @event_round[card.effect] += card.modifier.to_i
+      elsif card.effect == "hull"
+        @event_round["attack"] += card.modifier.to_i.abs
+      end
+    end
   end
 
 end
