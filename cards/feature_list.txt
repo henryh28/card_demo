@@ -9,3 +9,6 @@ pending - end of round tally of damage and rewards
 pending - implement game end conditions (success vs fail). stats persist from round to round
 
 done - add buyable deck, new equipment(seed file)
+
+
+test
