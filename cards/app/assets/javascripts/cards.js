@@ -1,5 +1,11 @@
 $(document).ready(function(){
   bindEvent();
+
+  $('.player_card').draggable( {
+    cursor: 'crosshair',
+    stack: $('.player_card'),
+  });
+
 });
 
 
@@ -38,6 +44,5 @@ function processEvent(card) {
 }
 
 
-$('.player_card').droppable
 
 
