@@ -3,15 +3,20 @@ $(document).ready(function(){
 });
 
 
-function bindEvent(){
+function bindEvent() {
   $('.buyable_cards').click(function(event){
-    event.preventDefault()
-    testFunction(this);
+    event.preventDefault();
+    buyCard(this);
+  });
+
+  $('.event_cards').click(function(event){
+    event.preventDefault();
+    processEvent(this);
   });
 };
 
 
-function testFunction(card) {
+function buyCard(card) {
   // console.log(card)
   var cardId = $(card).find("#card_id").val()
   $.ajax({
@@ -20,4 +25,19 @@ function testFunction(card) {
     data: {card: cardId }
   })
 };
+
+
+function processEvent(card) {
+  var cardId = $(card).find('#card_id').val()
+  console.log(cardId)
+  $.ajax({
+    url: '/games/event',
+    type: 'get',
+    data: {card: cardId }
+  })
+}
+
+
+$('.player_card').droppable
+
 

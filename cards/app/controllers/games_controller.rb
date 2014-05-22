@@ -35,6 +35,22 @@ class GamesController < ApplicationController
     end
   end
 
+
+  def event
+    p "$$$$$$$$$"
+    puts params.inspect
+
+    event_card = Card.find(params[:card])
+    puts event_card.inspect
+
+    if event_card.card_type == "enemy"
+      compute_attack
+    end
+
+
+  end
+
+
   def game_end
   end
 

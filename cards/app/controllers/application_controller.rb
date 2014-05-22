@@ -69,4 +69,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
+  def compute_attack
+    p " -------- in here guys --------"
+    puts params.inspect
+  end
+
 end

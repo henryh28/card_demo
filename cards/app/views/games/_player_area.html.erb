@@ -2,9 +2,9 @@
   <legend>Player Hand</legend>
   <div class="player_hand">
     <% session[:player_hand].each do |card| %>
-      <div class="card">
-        <div class="card_type"><%= card.card_type %></div><br>
-        <div class="card_effect"><%= card.effect %></div><br>
+      <div class="player_card">
+        <div class="card_type"><%= card.card_type %></div>
+        <div class="card_effect"><%= card.effect %></div>
         <div class="card_modifier"><%= card.modifier %></div><br>
         <div class="card_flavor_text">"<%= card.flavor_text %>"</div><br>
       </div>
@@ -12,7 +12,6 @@
   </div><br>
 
   <div class="round_details">
-    <% tally_resources %>
     <table>
       <tr>
         <th>Draw pile: <%= session[:player_deck].size %></th>

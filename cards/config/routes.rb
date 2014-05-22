@@ -11,5 +11,6 @@ Cards::Application.routes.draw do
   post "games/play", :to => "games#play"
   get "games/buy", :to => "games#buy"
   get "games/game_end", :to => "games#game_end"
+  get "games/event", :to => "games#event"
 
 end

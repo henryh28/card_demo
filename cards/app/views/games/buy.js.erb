@@ -1,5 +1,6 @@
 console.log("updating partials")
-$('.buy_area').replaceWith('<%= escape_javascript(render(:partial => 'buy_deck', :locals => { :tester => "woohoo"})) %>' )
-$('.resource_hud').replaceWith('<%= escape_javascript(render(:partial => 'resource_hud', :locals => { :tester => "woohoo"})) %>' )
-$('.debug').replaceWith('<%= escape_javascript(render(:partial => 'dev_debug', :locals => { :tester => "woohoo"})) %>' )
+$('.buy_area').replaceWith('<%= escape_javascript(render(:partial => 'buy_deck' )) %>' )
+$('.resource_hud').replaceWith('<%= escape_javascript(render(:partial => 'resource_hud')) %>' )
+$('.debug').replaceWith('<%= escape_javascript(render(:partial => 'dev_debug', :locals => { :notes => "none"})) %>' )
+$('.system_message').replaceWith('<%= escape_javascript(render(:partial => 'system_message')) %>')
   bindEvent();
