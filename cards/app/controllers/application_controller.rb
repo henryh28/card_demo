@@ -1,30 +1,44 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  def initialize_variables
-    session[:player_discard], session[:event_discard], session[:buy_discard] = [], [], []
 
+  def initialize_player(shipstat_hash)
+    session[:player] = User.new
+    @player = session[:player]
+
+    @player.hull = shipstat_hash["max_hull"]
+    @player.energy = shipstat_hash["max_energy"]
+    @player.shield = shipstat_hash["max_shield"]
+    @player.crew = shipstat_hash["max_crew"]
+    @player.fuel = shipstat_hash["max_fuel"]
+    @player.hardpoint = shipstat_hash["max_hardpoint"]
+    @player.speed = shipstat_hash["max_speed"]
+    @player.credit = 0
+
+    session[:player_discard] = Array.new
     session[:player_deck] = Deck.find_by_name("starting").cards.shuffle!
     session[:player_hand] = session[:player_deck].slice!(0..4)
+
+    @round_stats = Round.new
+    @event_round = Round.new
+  end
+
+
+  def initialize_system
+    session[:event_discard], session[:buy_discard] = [], []
 
     session[:event_deck] = Deck.find_by_name("main").cards.shuffle!
     session[:event_hand] = session[:event_deck].slice!(0..2)
 
     session[:buy_deck] = Deck.find_by_name("buy").cards.shuffle!
     session[:buy_hand] = session[:buy_deck].slice!(0..2)
-
-    @round_stats = Round.new
-    @event_round = Round.new
-
-    session[:hull] = 10
-    session[:shield], session[:energy], session[:credit] = 0, 0, 0
   end
 
 
   def round_housekeeping
     session[:event_hand].each do |card|
       if card.effect == "credit" || card.effect == "energy"
-        session[:"#{card.effect}"] += card.modifier.to_i
+        puts @player[:"#{card.effect}"] += card.modifier.to_i
       elsif card.effect == "hull"
         damage_ship(card.modifier)
       end
@@ -33,12 +47,12 @@ class ApplicationController < ActionController::Base
 
 
   def damage_ship(damage_amount)
-    if damage_amount.to_i.abs < session[:shield]
-      session[:shield] += damage_amount.to_i
+    if damage_amount.to_i.abs < @player.shield
+      @player.shield += damage_amount.to_i
     else
-      hull_damage = damage_amount.to_i.abs - session[:shield]
-      session[:shield] = 0
-      session[:hull] -= hull_damage
+      hull_damage = damage_amount.to_i.abs - @player.shield
+      @player.shield = 0
+      @player.hull -= hull_damage
     end
   end
 
@@ -72,9 +86,10 @@ class ApplicationController < ActionController::Base
 
   def compute_attack
     enemy_strength = @event_card.modifier.to_i.abs
-    if session[:attack] >= enemy_strength && power_check(enemy_strength)
-      session[:energy] -= enemy_strength
+    if @player.attack >= enemy_strength && power_check(enemy_strength)
+      @player.energy -= enemy_strength
       session[:event_discard].push(session[:event_hand].delete(@event_card))
+
       flash[:notice] = "boom!"
     else
       flash[:notice] = "Not enough resources to attack enemy ship"
@@ -82,7 +97,7 @@ class ApplicationController < ActionController::Base
   end
 
   def power_check(needed_power)
-    session[:energy] >= needed_power
+    @player.energy >= needed_power
   end
 
 end

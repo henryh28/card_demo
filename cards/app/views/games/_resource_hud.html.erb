@@ -1,10 +1,10 @@
   <div class="resource_hud">
     <table>
       <tr>
-        <th>Hull Strength: <%= session[:hull] %></th>
-        <th>Shield Strength: <%= session[:shield] %></th>
-        <th>Energy Reserves: <%= session[:energy] %></th>
-        <th>Credit: <%= session[:credit] %></th>
+        <th>Hull Strength: <%= @player.hull %></th>
+        <th>Shield Strength: <%= @player.shield %></th>
+        <th>Energy Reserves: <%= @player.energy %></th>
+        <th>Credit: <%= @player.credit %></th>
       </tr>
     </table>
   </div>

@@ -1,13 +1,15 @@
 module ApplicationHelper
 
   def tally_resources
+    @player.attack = 0
     session[:player_hand].each do |card|
       if card.card_type == "resource" || card.card_type == "equipment"
         @round_stats[card.effect] += card.modifier.to_i
-        session[:"#{card.effect}"] += card.modifier.to_i
-        session[:"#{card.effect}"] = 10 if session[:"#{card.effect}"] > 10 && card.effect != "credit"
+        @player[:"#{card.effect}"] += card.modifier.to_i
+        @player[:"#{card.effect}"] = 10 if @player[:"#{card.effect}"] > 10 && card.effect != "credit"
       elsif card.card_type == "combat"
         @round_stats["attack"] += card.modifier.to_i
+        @player.attack += card.modifier.to_i
       end
     end
   end
@@ -18,7 +20,7 @@ module ApplicationHelper
       if card.effect == "energy" || card.effect == "credit"
         @event_round[card.effect] += card.modifier.to_i
       elsif card.effect == "hull"
-        @event_round["attack"] += card.modifier.to_i.abs
+        @event_round.attack += card.modifier.to_i.abs
       end
     end
   end

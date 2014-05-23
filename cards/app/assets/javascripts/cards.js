@@ -1,14 +1,14 @@
 $(document).ready(function(){
   bindEvent();
 
-  $('.player_card').draggable( {
-    cursor: 'crosshair',
-    stack: $('.player_card')
-  });
+  // $('.player_card').draggable( {
+  //   cursor: 'crosshair',
+  //   stack: $('.player_card')
+  // });
 
-  $('.enemy_cards').droppable( {
-    drop: handleAttack
-  });
+  // $('.enemy_cards').droppable( {
+  //   drop: handleAttack
+  // });
 
 
 });
@@ -39,8 +39,8 @@ function buyCard(card) {
 
 
 function processEvent(card) {
-  var cardId = $(card).find('#card_id').val()
-  console.log(cardId)
+  var cardId = $(card).find("#card_id").val()
+  // console.log(cardId)
   $.ajax({
     url: '/games/event',
     type: 'get',
@@ -49,9 +49,9 @@ function processEvent(card) {
 }
 
 
-function handleAttack( event, ui ) {
-  var draggable = ui.draggable;
-  console.log( 'process attack ' )
-}
+// function handleAttack( event, ui ) {
+//   var draggable = ui.draggable;
+//   console.log( 'process attack ' )
+// }
 
 
