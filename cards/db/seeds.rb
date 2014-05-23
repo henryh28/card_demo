@@ -18,7 +18,7 @@ starting = Deck.create(name: "starting", deck_type: "player")
 
 
 main = Deck.create(name: "main", deck_type: "event")
-5.times { main.cards.create(card_type: "enemy", effect: "hull", modifier: "-1", flavor_text: "a_weak_pirate_01", cost: "0") }
+5.times { main.cards.create(card_type: "enemy", effect: "hull", modifier: "-1", flavor_text: "a_weak_pirate_01", cost: "1000") }
 
 4.times { main.cards.create(card_type: "enemy", effect: "hull", modifier: "-2", flavor_text: "I want yer loot!", cost: "0") }
 

@@ -1,14 +1,14 @@
 $(document).ready(function(){
   bindEvent();
 
-  $('.player_card').draggable( {
-    cursor: 'crosshair',
-    stack: $('.player_card')
-  });
+  // $('.player_card').draggable( {
+  //   cursor: 'crosshair',
+  //   stack: $('.player_card')
+  // });
 
-  $('.enemy_cards').droppable( {
-    drop: handleAttack
-  });
+  // $('.enemy_cards').droppable( {
+  //   drop: handleAttack
+  // });
 
 
 });
@@ -30,6 +30,7 @@ function bindEvent() {
 function buyCard(card) {
   // console.log(card)
   var cardId = $(card).find("#card_id").val()
+  console.log(cardId)
   $.ajax({
     url: '/games/buy',
     type: 'get',
