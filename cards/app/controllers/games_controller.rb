@@ -41,7 +41,9 @@ class GamesController < ApplicationController
     p @event_card = Card.find(params[:card])
     compute_attack if @event_card.card_type == "enemy"
 
-    responde_to do |format|
+    session[:notice] = "test test test"
+
+    respond_to do |format|
       format.js
     end
   end
