@@ -1,3 +1,5 @@
+<% event_tally %>
+
 <fieldset class="event_area">
   <legend>Game Events</legend>
   <% session[:event_hand].each do |card| %>
@@ -15,7 +17,6 @@
   <% end %>
 
     <div class="event_summary">
-    <% event_tally %>
     <table>
       <tr>
         <th>Enemy Strength: <%= @event_round.attack %></th>

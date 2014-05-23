@@ -13,6 +13,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :crew
       t.integer :hull
       t.integer :credit
+      t.integer :attack
 
       t.timestamps
     end

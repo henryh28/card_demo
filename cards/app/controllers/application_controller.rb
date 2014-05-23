@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+
   def initialize_player(shipstat_hash)
     session[:player] = User.new
     @player = session[:player]
@@ -13,10 +14,6 @@ class ApplicationController < ActionController::Base
     @player.hardpoint = shipstat_hash["max_hardpoint"]
     @player.speed = shipstat_hash["max_speed"]
     @player.credit = 0
-
-    p "++++++++++++++++"
-    puts @player.inspect
-
 
     session[:player_discard] = Array.new
     session[:player_deck] = Deck.find_by_name("starting").cards.shuffle!
@@ -41,9 +38,6 @@ class ApplicationController < ActionController::Base
   def round_housekeeping
     session[:event_hand].each do |card|
       if card.effect == "credit" || card.effect == "energy"
-        p "________________"
-        puts @player.inspect
-        p "$$$$$$$$$$$$$$$$"
         puts @player[:"#{card.effect}"] += card.modifier.to_i
       elsif card.effect == "hull"
         damage_ship(card.modifier)
@@ -92,9 +86,10 @@ class ApplicationController < ActionController::Base
 
   def compute_attack
     enemy_strength = @event_card.modifier.to_i.abs
-    if session[:attack] >= enemy_strength && power_check(enemy_strength)
-      session[:energy] -= enemy_strength
+    if @player.attack >= enemy_strength && power_check(enemy_strength)
+      @player.energy -= enemy_strength
       session[:event_discard].push(session[:event_hand].delete(@event_card))
+
       flash[:notice] = "boom!"
     else
       flash[:notice] = "Not enough resources to attack enemy ship"
@@ -102,7 +97,7 @@ class ApplicationController < ActionController::Base
   end
 
   def power_check(needed_power)
-    session[:energy] >= needed_power
+    @player.energy >= needed_power
   end
 
 end

@@ -26,8 +26,6 @@ class GamesController < ApplicationController
   def buy
     @player = session[:player]
     buy_card = Card.find(params[:card])
-    p "^^^^^^^^^^"
-    puts buy_card.inspect
     if buy_card.cost.to_i > @player.credit
       flash[:notice] = "not enough cash. buy cancelled"
     else
@@ -43,6 +41,8 @@ class GamesController < ApplicationController
 
 
   def event
+    @player = session[:player]
+    @event_round = Round.new
     @event_card = Card.find(params[:card])
     compute_attack if @event_card.card_type == "enemy"
 

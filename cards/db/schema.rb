@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20140523162105) do
     t.integer  "crew"
     t.integer  "hull"
     t.integer  "credit"
+    t.integer  "attack"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
