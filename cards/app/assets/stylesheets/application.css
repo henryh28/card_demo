@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require jquery.ui.all
  *= require_tree .
  */
 
@@ -79,7 +80,7 @@ td {
 
 
 
-.card, .buyable_cards {
+.player_card, .buyable_cards, .event_cards, .enemy_cards {
   display: inline-block;
   position: relative;
   border: 1px solid lightslategray;
@@ -196,4 +197,10 @@ legend {
 }.link_button:active {
   position:relative;
   top:1px;
+}
+
+.system_message {
+  clear: both;
+  font-weight: bold;
+  color: red;
 }

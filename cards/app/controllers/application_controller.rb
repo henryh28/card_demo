@@ -69,4 +69,29 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
+  def compute_attack
+    p "------ attempting attack -----"
+    p enemy_strength = @event_card.modifier.to_i.abs
+    if session[:attack] >= enemy_strength && power_check(enemy_strength)
+      p "nuke it"
+      p session[:energy]
+      session[:energy] -= enemy_strength
+      p "000000 now session energy is 00000"
+      p session[:energy]
+      session[:event_discard].push(session[:event_hand].delete(@event_card))
+      p "event_hand is now )))))))))))"
+      puts session[:event_hand].inspect
+      p "event_discard is now *(((****"
+      puts session[:event_discard].inspect
+      p "event_discard size is now: #{session[:event_discard].size}"
+    else
+      p session[:notice] = "notenough resources to attack enmy ship"
+    end
+  end
+
+  def power_check(needed_power)
+    session[:energy] >= needed_power
+  end
+
 end

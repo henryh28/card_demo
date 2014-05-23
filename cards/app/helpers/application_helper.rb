@@ -6,6 +6,8 @@ module ApplicationHelper
         @round_stats[card.effect] += card.modifier.to_i
         session[:"#{card.effect}"] += card.modifier.to_i
         session[:"#{card.effect}"] = 10 if session[:"#{card.effect}"] > 10 && card.effect != "credit"
+      elsif card.card_type == "combat"
+        @round_stats["attack"] += card.modifier.to_i
       end
     end
   end
