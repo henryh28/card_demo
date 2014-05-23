@@ -80,7 +80,7 @@ td {
 
 
 
-.player_card, .buyable_cards, .event_cards {
+.player_card, .buyable_cards, .event_cards, .enemy_cards {
   display: inline-block;
   position: relative;
   border: 1px solid lightslategray;

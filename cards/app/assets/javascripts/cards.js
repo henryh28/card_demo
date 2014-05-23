@@ -3,8 +3,13 @@ $(document).ready(function(){
 
   $('.player_card').draggable( {
     cursor: 'crosshair',
-    stack: $('.player_card'),
+    stack: $('.player_card')
   });
+
+  $('.enemy_cards').droppable( {
+    drop: handleAttack
+  });
+
 
 });
 
@@ -15,7 +20,7 @@ function bindEvent() {
     buyCard(this);
   });
 
-  $('.event_cards').click(function(event){
+  $('.enemy_cards').click(function(event){
     event.preventDefault();
     processEvent(this);
   });
@@ -44,5 +49,9 @@ function processEvent(card) {
 }
 
 
+function handleAttack( event, ui ) {
+  var draggable = ui.draggable;
+  console.log( 'process attack ' )
+}
 
 

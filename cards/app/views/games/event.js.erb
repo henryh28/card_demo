@@ -1,0 +1,4 @@
+console.log("Checking attack")
+$('.resource_hud').replaceWith('<%= escape_javascript(render(:partial => 'resource_hud')) %>' )
+$('.system_message').replaceWith('<%= escape_javascript(render(:partial => 'system_message')) %>')
+  bindEvent();

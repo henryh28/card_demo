@@ -1,7 +1,11 @@
 <fieldset class="event_area">
   <legend>Game Events</legend>
   <% session[:event_hand].each do |card| %>
-    <div class="event_cards">
+    <% if card.card_type == "enemy" %>
+      <div class="enemy_cards">
+    <% else %>
+      <div class="event_cards">
+    <% end %>
       <div class="card_type"><%= card.card_type %></div>
       <div class="card_effect"><%= card.effect %></div>
       <div class="card_modifier"><%= card.modifier %></div><br>

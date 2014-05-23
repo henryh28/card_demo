@@ -37,17 +37,13 @@ class GamesController < ApplicationController
 
 
   def event
-    p "$$$$$$$$$"
-    puts params.inspect
+    p "$$$$$$$$$$"
+    p @event_card = Card.find(params[:card])
+    compute_attack if @event_card.card_type == "enemy"
 
-    event_card = Card.find(params[:card])
-    puts event_card.inspect
-
-    if event_card.card_type == "enemy"
-      compute_attack
+    responde_to do |format|
+      format.js
     end
-
-
   end
 
 
