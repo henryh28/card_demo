@@ -60,8 +60,10 @@ ActiveRecord::Schema.define(:version => 20140523162105) do
     t.integer  "max_fuel",      :default => 3
     t.integer  "max_crew",      :default => 3
     t.integer  "max_hull",      :default => 5
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.integer  "max_cargo",     :default => 10
+    t.text     "cargo_bay"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -77,6 +79,8 @@ ActiveRecord::Schema.define(:version => 20140523162105) do
     t.integer  "hull"
     t.integer  "credit"
     t.integer  "attack"
+    t.integer  "cargo"
+    t.text     "cargo_bay"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

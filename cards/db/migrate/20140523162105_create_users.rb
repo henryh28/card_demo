@@ -14,6 +14,8 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :hull
       t.integer :credit
       t.integer :attack
+      t.integer :cargo
+      t.text :cargo_bay
 
       t.timestamps
     end

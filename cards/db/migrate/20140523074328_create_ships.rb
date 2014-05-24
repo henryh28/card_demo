@@ -8,6 +8,8 @@ class CreateShips < ActiveRecord::Migration
       t.integer :max_fuel, :default => "3"
       t.integer :max_crew, :default => "3"
       t.integer :max_hull, :default => "5"
+      t.integer :max_cargo, :default => "10"
+      t.text :cargo_bay
 
       t.timestamps
     end

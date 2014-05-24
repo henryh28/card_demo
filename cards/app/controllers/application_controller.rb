@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
     @player.hardpoint = shipstat_hash["max_hardpoint"]
     @player.speed = shipstat_hash["max_speed"]
     @player.credit = 0
+    @player.cargo_bay = shipstat_hash["cargo_bay"]
+    @player.cargo = 0
 
     session[:player_discard] = Array.new
     session[:player_deck] = Deck.find_by_name("starting").cards.shuffle!
