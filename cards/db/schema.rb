@@ -33,15 +33,6 @@ ActiveRecord::Schema.define(:version => 20140523162105) do
     t.string "name"
   end
 
-  create_table "rounds", :force => true do |t|
-    t.integer  "credit",     :default => 0
-    t.integer  "energy",     :default => 0
-    t.integer  "attack",     :default => 0
-    t.integer  "shield",     :default => 0
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-  end
-
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
@@ -70,19 +61,19 @@ ActiveRecord::Schema.define(:version => 20140523162105) do
     t.string   "username"
     t.string   "password"
     t.string   "email"
-    t.integer  "energy"
-    t.integer  "shield"
-    t.integer  "hardpoint"
-    t.integer  "speed"
-    t.integer  "fuel"
-    t.integer  "crew"
-    t.integer  "hull"
-    t.integer  "credit"
-    t.integer  "attack"
-    t.integer  "cargo"
+    t.integer  "energy",     :default => 0
+    t.integer  "shield",     :default => 0
+    t.integer  "hardpoint",  :default => 0
+    t.integer  "speed",      :default => 0
+    t.integer  "fuel",       :default => 0
+    t.integer  "crew",       :default => 0
+    t.integer  "hull",       :default => 0
+    t.integer  "credit",     :default => 0
+    t.integer  "attack",     :default => 0
+    t.integer  "cargo",      :default => 0
     t.text     "cargo_bay"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
 end

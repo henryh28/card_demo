@@ -1,6 +1,8 @@
 <% tally_resources %>
+<% @event_results = User.new %>
+<% event_tally(@event_results) %>
 
-<%= render "event_deck" %>
+<%= render "event_deck", locals: {event_results: @event_results} %>
 <%= render "buy_deck" %>
 <%= render "player_area" %>
 

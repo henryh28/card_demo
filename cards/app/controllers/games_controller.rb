@@ -18,8 +18,6 @@ class GamesController < ApplicationController
     discard_cards
     draw_new_cards("player_deck", "player_discard", "player_hand", player_hand_size)
     draw_new_cards("event_deck", "event_discard", "event_hand", event_hand_size)
-    @round_stats = Round.new
-    @event_round = Round.new
     refresh_buy_deck?
   end
 
@@ -42,7 +40,6 @@ class GamesController < ApplicationController
 
   def event
     @player = session[:player]
-    @event_round = Round.new
     @event_card = Card.find(params[:card])
     compute_attack if @event_card.card_type == "enemy"
 
