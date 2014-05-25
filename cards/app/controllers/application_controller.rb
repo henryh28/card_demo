@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
     @player.credit = 0
     @player.cargo_bay = shipstat_hash["cargo_bay"]
     @player.cargo = 0
+    @player.cargo_bay = Array.new
     @player.attack = 0
 
     session[:player_discard] = Array.new
@@ -97,6 +98,19 @@ class ApplicationController < ActionController::Base
 
   def power_check(needed_power)
     @player.energy >= needed_power
+  end
+
+
+  def loot_cargo
+    if @player.cargo + @event_card.modifier.to_i <= session[:ship].max_cargo
+      @player.cargo += @event_card.modifier.to_i
+      p "=== player cargo space now #{@player.cargo}"
+      @player.cargo_bay.push(@event_card)
+      session[:event_hand].delete(@event_card)
+      flash[:notice] = "Loaded #{@event_card.flavor_text} into cargo bay. Space: #{@player.cargo}/#{session[:ship].max_cargo}"
+    else
+      flash[:notice] = "Not enough room in cargo bay"
+    end
   end
 
 end

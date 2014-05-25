@@ -3,6 +3,8 @@
   <% session[:event_hand].each do |card| %>
     <% if card.card_type == "enemy" %>
       <div class="enemy_cards">
+    <% elsif card.effect == "cargo" %>
+      <div class="cargo_cards">
     <% else %>
       <div class="event_cards">
     <% end %>

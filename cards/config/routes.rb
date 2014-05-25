@@ -12,5 +12,7 @@ Cards::Application.routes.draw do
   get "games/buy", :to => "games#buy"
   get "games/game_end", :to => "games#game_end"
   get "games/event", :to => "games#event"
+  get "games/cargo", :to => "games#cargo"
+  get "games/jettison", :to => "games#jettison"
 
 end
