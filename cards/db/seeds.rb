@@ -8,7 +8,7 @@
 
 starting = Deck.create(name: "starting", deck_type: "player")
 4.times { starting.cards.create(card_type: "equipment", effect: "energy", modifier: "1", flavor_text: "starting engine", cost: "0") }
-4.times { starting.cards.create(card_type: "combat", effect: "attack", modifier: "1", flavor_text: "Lasers!  pew pew!", cost: "0") }
+4.times { starting.cards.create(card_type: "attack", effect: "attack", modifier: "1", flavor_text: "Lasers!  pew pew!", cost: "0") }
 4.times { starting.cards.create(card_type: "equipment", effect: "shield", modifier: "1", flavor_text: "Shields up!", cost: "0") }
 3.times { starting.cards.create(card_type: "resource", effect: "credit", modifier: "1000", flavor_text: "Did someone drop these?", cost: "0") }
 
@@ -42,11 +42,11 @@ main_medium = Deck.create(name: "main_medium", deck_type: "event")
 
 
 buy = Deck.create(name: "buy", deck_type: "upgrades")
-3.times { buy.cards.create(card_type: "combat", effect: "attack", modifier: "2", flavor_text: "Green lasers!", cost: "4000") }
-2.times { buy.cards.create(card_type: "combat", effect: "attack", modifier: "3", flavor_text: "Purple lasers!", cost: "8000") }
-2.times { buy.cards.create(card_type: "combat", effect: "defense", modifier: "2", flavor_text: "Rainbow happy shield", cost: "5000") }
-2.times { buy.cards.create(card_type: "resource", effect: "energy", modifier: "2", flavor_text: "I think it's working!", cost: "7000") }
-2.times { buy.cards.create(card_type: "resource", effect: "energy", modifier: "3", flavor_text: "How'd it do that?!", cost: "15000") }
+3.times { buy.cards.create(card_type: "attack", effect: "attack", modifier: "2", flavor_text: "Green lasers!", cost: "4000") }
+3.times { buy.cards.create(card_type: "attack", effect: "attack", modifier: "3", flavor_text: "Purple lasers!", cost: "8000") }
+3.times { buy.cards.create(card_type: "equipment", effect: "shield", modifier: "2", flavor_text: "Rainbow happy shield", cost: "5000") }
+3.times { buy.cards.create(card_type: "resource", effect: "energy", modifier: "2", flavor_text: "I think it's working!", cost: "7000") }
+3.times { buy.cards.create(card_type: "resource", effect: "energy", modifier: "3", flavor_text: "How'd it do that?!", cost: "15000") }
 
 
 

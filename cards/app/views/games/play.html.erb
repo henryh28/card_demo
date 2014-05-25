@@ -1,8 +1,7 @@
 <% tally_resources %>
-<% @event_results = User.new %>
-<% event_tally(@event_results) %>
+<% event_tally %>
 
-<%= render "event_deck", locals: {event_results: @event_results} %>
+<%= render "event_deck" %>
 <%= render "buy_deck" %>
 <%= render "player_area" %>
 
@@ -11,3 +10,6 @@
 <%= link_to "Home", root_path, class: "link_button" %>
 
 <%= render "system_message" %>
+
+<br>
+<%#= render "dev_debug" %>

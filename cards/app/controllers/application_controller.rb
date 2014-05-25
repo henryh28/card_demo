@@ -75,7 +75,7 @@ class ApplicationController < ActionController::Base
 
 
   def refresh_buy_deck?
-    if session[:buy_hand].size < 3
+    if session[:buy_hand].size < 3 && session[:buy_deck].size > 3
       draw_amount = 3 - session[:buy_hand].size
       draw_amount.times { session[:buy_hand].push(session[:buy_deck].slice!(0)) }
     end
@@ -88,7 +88,7 @@ class ApplicationController < ActionController::Base
       @player.energy -= enemy_strength
       @player.attack -= enemy_strength
       session[:event_discard].push(session[:event_hand].delete(@event_card))
-
+      @player.credit += @event_card.cost.to_i
       flash[:notice] = "boom!"
     else
       flash[:notice] = "Not enough resources to attack enemy ship"
