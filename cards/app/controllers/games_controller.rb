@@ -53,6 +53,29 @@ class GamesController < ApplicationController
   end
 
 
+  def cargo
+    @player = session[:player]
+    @event_results = User.new
+    @event_card = Card.find(params[:card])
+    loot_cargo if @event_card.effect == "cargo"
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def jettison
+    @player = session[:player]
+    @event_card = Card.find(params[:card])
+    @player.cargo -= @event_card.modifier.to_i
+    flash[:notice] = "#{@event_card.flavor_text} was jettisoned"
+    @player.cargo_bay.delete(@event_card)
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def game_end
   end
 
