@@ -2,6 +2,7 @@ class GamesController < ApplicationController
 
   def new
     session[:ship] = Ship.new
+    @event_results = User.new
     initialize_player(session[:ship].attributes)
     initialize_system
     render "play"
@@ -9,6 +10,7 @@ class GamesController < ApplicationController
 
   def play
     @player = session[:player]
+    @event_results = User.new
     round_housekeeping
     redirect_to games_game_end_path if @player.hull < 1
 
@@ -18,13 +20,12 @@ class GamesController < ApplicationController
     discard_cards
     draw_new_cards("player_deck", "player_discard", "player_hand", player_hand_size)
     draw_new_cards("event_deck", "event_discard", "event_hand", event_hand_size)
-    @round_stats = Round.new
-    @event_round = Round.new
     refresh_buy_deck?
   end
 
   def buy
     @player = session[:player]
+    @event_results = User.new
     buy_card = Card.find(params[:card])
     if buy_card.cost.to_i > @player.credit
       flash[:notice] = "not enough cash. buy cancelled"
@@ -42,7 +43,7 @@ class GamesController < ApplicationController
 
   def event
     @player = session[:player]
-    @event_round = Round.new
+    @event_results = User.new
     @event_card = Card.find(params[:card])
     compute_attack if @event_card.card_type == "enemy"
 

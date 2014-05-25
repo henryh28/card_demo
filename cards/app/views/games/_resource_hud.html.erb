@@ -1,10 +1,14 @@
   <div class="resource_hud">
     <table>
       <tr>
-        <th>Hull Strength: <%= @player.hull %></th>
-        <th>Shield Strength: <%= @player.shield %></th>
-        <th>Energy Reserves: <%= @player.energy %></th>
-        <th>Credit: <%= @player.credit %></th>
+        <th>Hull: <br><span class="resource_value"><%= @player.hull %></span></th>
+        <th>Attack: <br><span class="resource_value"><%= @player.attack %></span></th>
+        <th>Shield: <br><span class="resource_value"><%= @player.shield %></span></th>
+        <th>Energy: <br><span class="resource_value"><%= @player.energy %></span></th>
+        <th>Credit: <br><span class="resource_value"><%= @player.credit %></span></th>
+        <th>Cargo Bay: <br><span class="resource_value"><%= @player.cargo %></span> / <span class="resource_value"><%= session[:ship].max_cargo %></span></th>
+        <th>Draw pile: <br><span class="resource_value"><%= session[:player_deck].size %></span></th>
+        <th>Discards: <br><span class="resource_value"><%= session[:player_discard].size %></span></th>
       </tr>
     </table>
   </div>

@@ -116,26 +116,20 @@ td {
   bottom: 5px;
 }
 
-.round_details {
-  color: orchid;
-  width: 70%;
-  margin-left: 10%;
-}
-
-.round_details th {
-  padding: 5px;
-  background-color: aliceblue;
-}
 
 .resource_hud {
   color: darkseagreen;
-  width: 70%;
-  margin-left: 10%;
+  width: 90%;
+  margin-left: 5%;
 }
 
 .resource_hud th {
-  background-color: lightslategray;
+  background-color: aliceblue;
   padding: 10px;
+}
+
+.resource_value {
+  color: orchid;
 }
 
 .event_summary {

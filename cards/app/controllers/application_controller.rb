@@ -14,20 +14,22 @@ class ApplicationController < ActionController::Base
     @player.hardpoint = shipstat_hash["max_hardpoint"]
     @player.speed = shipstat_hash["max_speed"]
     @player.credit = 0
+    @player.cargo_bay = shipstat_hash["cargo_bay"]
+    @player.cargo = 0
+    @player.attack = 0
 
     session[:player_discard] = Array.new
     session[:player_deck] = Deck.find_by_name("starting").cards.shuffle!
     session[:player_hand] = session[:player_deck].slice!(0..4)
-
-    @round_stats = Round.new
-    @event_round = Round.new
   end
 
 
   def initialize_system
     session[:event_discard], session[:buy_discard] = [], []
 
-    session[:event_deck] = Deck.find_by_name("main").cards.shuffle!
+    easy_deck = Deck.find_by_name("main_easy").cards.shuffle!
+    medium_deck = Deck.find_by_name("main_medium").cards.shuffle!
+    session[:event_deck] = easy_deck + medium_deck
     session[:event_hand] = session[:event_deck].slice!(0..2)
 
     session[:buy_deck] = Deck.find_by_name("buy").cards.shuffle!
@@ -37,11 +39,7 @@ class ApplicationController < ActionController::Base
 
   def round_housekeeping
     session[:event_hand].each do |card|
-      if card.effect == "credit" || card.effect == "energy"
-        puts @player[:"#{card.effect}"] += card.modifier.to_i
-      elsif card.effect == "hull"
-        damage_ship(card.modifier)
-      end
+      damage_ship(card.modifier) if card.effect == "hull"
     end
   end
 
@@ -77,7 +75,7 @@ class ApplicationController < ActionController::Base
 
 
   def refresh_buy_deck?
-    if session[:buy_hand].size < 3
+    if session[:buy_hand].size < 3 && session[:buy_deck].size > 3
       draw_amount = 3 - session[:buy_hand].size
       draw_amount.times { session[:buy_hand].push(session[:buy_deck].slice!(0)) }
     end
@@ -88,8 +86,9 @@ class ApplicationController < ActionController::Base
     enemy_strength = @event_card.modifier.to_i.abs
     if @player.attack >= enemy_strength && power_check(enemy_strength)
       @player.energy -= enemy_strength
+      @player.attack -= enemy_strength
       session[:event_discard].push(session[:event_hand].delete(@event_card))
-
+      @player.credit += @event_card.cost.to_i
       flash[:notice] = "boom!"
     else
       flash[:notice] = "Not enough resources to attack enemy ship"

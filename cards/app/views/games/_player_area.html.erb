@@ -11,18 +11,5 @@
     <% end %>
   </div><br>
 
-  <div class="round_details">
-    <table>
-      <tr>
-        <th>Draw pile: <%= session[:player_deck].size %></th>
-        <th>Discard: <%= session[:player_discard].size %></th>
-        <th>Attack: <%= @round_stats.attack %></th>
-        <th>Shield: <%= @round_stats.shield %></th>
-        <th>Energy: <%= @round_stats.energy %></th>
-        <th>Credit: <%= @round_stats.credit %></th>
-      </tr>
-    </table>
-  </div><br>
-
   <%= render "resource_hud" %>
 </fieldset><br>
