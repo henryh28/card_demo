@@ -30,16 +30,21 @@ function bindEvent() {
     lootCargo(this);
   })
 
-  $('.my_cargos').click(function(event){
+  $('.space_cargos').click(function(event){
     event.preventDefault();
     jettisonCargo(this);
   })
 
-  $('.station_repair').click(function(event){
+  $('.station_cargos').click(function(event){
     event.preventDefault();
-    console.log("repairing")
-
+    sellCargo(this);
   })
+
+  // $('.button_cargo').click(function(event){
+  //   event.preventDefault();
+  //   $('.cargo_area').slideToggle();
+  //   return false;
+  // })
 
 };
 
@@ -80,6 +85,16 @@ function jettisonCargo(card) {
   var cardId = $(card).find("#card_id").val();
   $.ajax({
     url: '/games/jettison',
+    type: 'get',
+    data: { card: cardId }
+  })
+}
+
+
+function sellCargo(card) {
+  var cardId = $(card).find("#card_id").val();
+  $.ajax({
+    url: '/games/sell',
     type: 'get',
     data: { card: cardId }
   })

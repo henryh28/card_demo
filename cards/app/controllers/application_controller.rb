@@ -108,12 +108,11 @@ class ApplicationController < ActionController::Base
 
 
   def loot_cargo
-    if @player.cargo + @event_card.modifier.to_i <= session[:ship].max_cargo
-      @player.cargo += @event_card.modifier.to_i
-      p "=== player cargo space now #{@player.cargo}"
-      @player.cargo_bay.push(@event_card)
-      session[:event_hand].delete(@event_card)
-      flash[:notice] = "Loaded #{@event_card.flavor_text} into cargo bay. Space: #{@player.cargo}/#{session[:ship].max_cargo}"
+    if @player.cargo + @cargo_card.modifier.to_i <= session[:ship].max_cargo
+      @player.cargo += @cargo_card.modifier.to_i
+      @player.cargo_bay.push(@cargo_card)
+      session[:event_hand].delete(@cargo_card)
+      flash[:notice] = "Loaded #{@cargo_card.flavor_text} into cargo bay. Space: #{@player.cargo}/#{session[:ship].max_cargo}"
     else
       flash[:notice] = "Not enough room in cargo bay"
     end
@@ -131,4 +130,5 @@ class ApplicationController < ActionController::Base
       flash[:notice] = "Insufficient credits for repair"
     end
   end
+
 end

@@ -53,8 +53,8 @@ class GamesController < ApplicationController
 
   def cargo
     @event_results = User.new
-    @event_card = Card.find(params[:card])
-    loot_cargo if @event_card.effect == "cargo"
+    @cargo_card = Card.find(params[:card])
+    loot_cargo if @cargo_card.effect == "cargo"
 
     respond_to do |format|
       format.js
@@ -62,10 +62,10 @@ class GamesController < ApplicationController
   end
 
   def jettison
-    @event_card = Card.find(params[:card])
-    @player.cargo -= @event_card.modifier.to_i
-    flash[:notice] = "#{@event_card.flavor_text} was jettisoned"
-    @player.cargo_bay.delete(@event_card)
+    @cargo_card = Card.find(params[:card])
+    @player.cargo -= @cargo_card.modifier.to_i
+    flash[:notice] = "#{@cargo_card.flavor_text} was jettisoned"
+    @player.cargo_bay.delete(@cargo_card)
 
     respond_to do |format|
       format.js
@@ -74,10 +74,24 @@ class GamesController < ApplicationController
 
 
   def station
+    session[:location] = "station"
     if params[:service] == "repair"
       repair_ship
     else
       flash[:notice] = "Docked at outpost."
+    end
+  end
+
+
+  def sell
+    @cargo_card = Card.find(params[:card])
+    @player.credit += @cargo_card.cost.to_i
+    @player.cargo -= @cargo_card.modifier.to_i
+    flash[:notice] = "Sold #{@cargo_card.flavor_text} for #{@cargo_card.cost} credits."
+    @player.cargo_bay.delete(@cargo_card)
+
+    respond_to do |format|
+      format.js
     end
   end
 

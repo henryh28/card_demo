@@ -1,4 +1,5 @@
-console.log("Out the hatch it goes")
+console.log("selling cargo")
 $('.cargo_area').replaceWith('<%= escape_javascript(render(:partial => 'shared/cargo_bay')) %>')
+$('.resource_hud').replaceWith('<%= escape_javascript(render(:partial => 'shared/resource_hud')) %>')
 $('.system_message').replaceWith('<%= escape_javascript(render(:partial => 'shared/system_message')) %>')
 bindEvent();
