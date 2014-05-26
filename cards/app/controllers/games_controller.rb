@@ -10,7 +10,6 @@ class GamesController < ApplicationController
 
   def play
     session[:location]="space"
-    @player = session[:player]
     @event_results = User.new
     round_housekeeping
     redirect_to games_game_end_path if @player.hull < 1
@@ -25,7 +24,6 @@ class GamesController < ApplicationController
   end
 
   def buy
-    @player = session[:player]
     @event_results = User.new
     buy_card = Card.find(params[:card])
     if buy_card.cost.to_i > @player.credit
@@ -43,7 +41,6 @@ class GamesController < ApplicationController
 
 
   def event
-    @player = session[:player]
     @event_results = User.new
     @event_card = Card.find(params[:card])
     compute_attack if @event_card.card_type == "enemy"
@@ -55,7 +52,6 @@ class GamesController < ApplicationController
 
 
   def cargo
-    @player = session[:player]
     @event_results = User.new
     @event_card = Card.find(params[:card])
     loot_cargo if @event_card.effect == "cargo"
@@ -66,7 +62,6 @@ class GamesController < ApplicationController
   end
 
   def jettison
-    @player = session[:player]
     @event_card = Card.find(params[:card])
     @player.cargo -= @event_card.modifier.to_i
     flash[:notice] = "#{@event_card.flavor_text} was jettisoned"
@@ -79,9 +74,13 @@ class GamesController < ApplicationController
 
 
   def station
-    @player = session[:player]
-    flash[:notice] = "Docked at outpost."
+    if params[:service] == "repair"
+      repair_ship
+    else
+      flash[:notice] = "Docked at outpost."
+    end
   end
+
 
   def game_end
   end

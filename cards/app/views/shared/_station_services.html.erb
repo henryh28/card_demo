@@ -1,6 +1,7 @@
 <fieldset class="station_services">
   <legend>Station Services</legend>
-    <ul>
-      <li><%= link_to "Repair Hull (200/hull)", games_station_path,:class => "station_repair" %></li>
+    <%= render "shared/resource_hud" %>
+    <ul class="services">
+      <li><%= link_to "Repair Hull (500/hull)", games_station_path(:service => "repair") %></li>
     </ul>
 </fieldset>

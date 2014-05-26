@@ -72,9 +72,10 @@ td {
 
 .station_services {
   border: 3px solid cornflowerblue;
-  padding: 25px;
-  width: 40%;
+  padding: 15px;
+  width: 45%;
   float: left;
+  position: relative;
 }
 
 .buy_area {
@@ -87,6 +88,7 @@ td {
 .cargo_area {
   border: 3px solid cornflowerblue;
   padding: 25px;
+  clear: both;
 }
 
 .ship_stats {
@@ -214,4 +216,13 @@ legend {
   clear: both;
   font-weight: bold;
   color: red;
+}
+
+
+.services {
+  display: inline-block;
+  float: right;
+  position: absolute;
+  top: 30px;
+  left: 230px;
 }

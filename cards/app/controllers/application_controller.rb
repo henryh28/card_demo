@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :set_player
+
+  def set_player
+    @player = session[:player] if session[:player]
+  end
+
 
   def initialize_player(shipstat_hash)
     session[:player] = User.new
@@ -16,10 +22,10 @@ class ApplicationController < ActionController::Base
     @player.credit = 0
     @player.cargo_bay = shipstat_hash["cargo_bay"]
     @player.cargo = 0
-    @player.cargo_bay = Array.new
+    @player.cargo_bay = []
     @player.attack = 0
 
-    session[:player_discard] = Array.new
+    session[:player_discard] = []
     session[:player_deck] = Deck.find_by_name("starting").cards.shuffle!
     session[:player_hand] = session[:player_deck].slice!(0..4)
   end
@@ -70,7 +76,7 @@ class ApplicationController < ActionController::Base
       session[:"#{hand}"] = session[:"#{deck}"].slice!(0..-1)
       session[:"#{deck}"] = session[:"#{discard}"].shuffle!
       draw_amount.times { session[:"#{hand}"].push(session[:"#{deck}"].slice!(0)) }
-      session[:"#{discard}"] = Array.new
+      session[:"#{discard}"] = []
     end
   end
 
@@ -113,4 +119,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
+  def repair_ship
+   if @player.hull < session[:ship].max_hull && @player.credit >= 500
+      @player.credit -= 500
+      @player.hull += 1
+      flash[:notice] = "Repaired 1 hull for 500 credits"
+    elsif @player.hull >= session[:ship].max_hull
+      flash[:notice] = "Hull at maximum"
+    elsif @player.credit < 500
+      flash[:notice] = "Insufficient credits for repair"
+    end
+  end
 end

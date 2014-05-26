@@ -10,8 +10,6 @@ starting = Deck.create(name: "starting", deck_type: "player")
 4.times { starting.cards.create(card_type: "equipment", effect: "energy", modifier: "1", flavor_text: "starting engine", cost: "0") }
 4.times { starting.cards.create(card_type: "attack", effect: "attack", modifier: "1", flavor_text: "Lasers!  pew pew!", cost: "0") }
 4.times { starting.cards.create(card_type: "equipment", effect: "shield", modifier: "1", flavor_text: "Shields up!", cost: "0") }
-3.times { starting.cards.create(card_type: "resource", effect: "credit", modifier: "1000", flavor_text: "Did someone drop these?", cost: "0") }
-
 
 
 main_easy = Deck.create(name: "main_easy", deck_type: "event")
