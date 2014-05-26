@@ -1,5 +1,5 @@
 console.log("Checking attack")
-$('.event_area').replaceWith('<%= escape_javascript(render(:partial => 'event_deck')) %>')
-$('.resource_hud').replaceWith('<%= escape_javascript(render(:partial => 'resource_hud')) %>' )
-$('.system_message').replaceWith('<%= escape_javascript(render(:partial => 'system_message')) %>')
+$('.event_area').replaceWith('<%= escape_javascript(render(:partial => 'shared/event_deck')) %>')
+$('.resource_hud').replaceWith('<%= escape_javascript(render(:partial => 'shared/resource_hud')) %>' )
+$('.system_message').replaceWith('<%= escape_javascript(render(:partial => 'shared/system_message')) %>')
 bindEvent();

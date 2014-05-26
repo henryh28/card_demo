@@ -1,16 +1,17 @@
 <% tally_resources %>
 <% event_tally %>
 
-<%= render "event_deck" %>
-<%= render "buy_deck" %>
-<%= render "player_area" %>
-<%= render "cargo_bay" %>
+<%= render "shared/event_deck" %>
+<%= render "shared/ship_stats" %>
+<%= render "shared/player_area" %>
+<%= render "shared/cargo_bay" %>
 
 <%= link_to "Play hand", games_play_path, method: :post, :class => "link_button" %>
+<%= link_to "Station", games_station_path, :class => "link_button" %>
 
-<%= link_to "Home", root_path, class: "link_button" %>
+<%= link_to "Home", root_path, class: "link_button", data: { confirm: "Quit game?" }%>
 
-<%= render "system_message" %>
+<%= render "shared/system_message" %>
 
 <br>
-<%= render "dev_debug" %>
+<%= render "shared/dev_debug" %>

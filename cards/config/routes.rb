@@ -14,5 +14,6 @@ Cards::Application.routes.draw do
   get "games/event", :to => "games#event"
   get "games/cargo", :to => "games#cargo"
   get "games/jettison", :to => "games#jettison"
+  get "games/station", :to => "games#station"
 
 end

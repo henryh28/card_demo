@@ -1,0 +1,24 @@
+  <div class="resource_hud">
+    <table>
+      <tr>
+        <th>Hull: <span class="resource_value"><%= @player.hull %></span></th>
+        <th>Crew: <span class="resource_value"><%= @player.crew %> / <%= session[:ship].max_crew %></span></th>
+      </tr>
+      <tr>
+        <th>Attack: <span class="resource_value"><%= @player.attack %></span></th>
+        <th>Speed: <span class="resource_value"><%= @player.speed %> / <%= session[:ship].max_speed %></span></th>
+      </tr>
+      <tr>
+        <th>Shield: <span class="resource_value"><%= @player.shield %></span></th>
+        <th>Cargo: <span class="resource_value"><%= @player.cargo %></span> / <span class="resource_value"><%= session[:ship].max_cargo %></span></th>
+      </tr>
+      <tr>
+        <th>Energy: <span class="resource_value"><%= @player.energy %></span></th>
+        <th>Draw pile: <span class="resource_value"><%= session[:player_deck].size %></span></th>
+      </tr>
+      <tr>
+        <th>Credit: <span class="resource_value"><%= @player.credit %></span></th>
+        <th>Discards: <span class="resource_value"><%= session[:player_discard].size %></span></th>
+      </tr>
+    </table>
+  </div>
