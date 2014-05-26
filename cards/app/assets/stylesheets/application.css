@@ -91,14 +91,17 @@ td {
   clear: both;
 }
 
-.ship_stats {
+.hud {
   border: 3px solid cornflowerblue;
   padding: 25px;
   width: 40%;
   float: right;
+  position: relative;
 }
 
-.player_card, .buyable_cards, .event_cards, .enemy_cards, .cargo_cards, .my_cargos {
+.player_card, .buyable_cards, .event_cards,
+.enemy_cards, .cargo_cards, .space_cargos,
+.station_cargos {
   display: inline-block;
   position: relative;
   border: 1px solid lightslategray;
@@ -225,4 +228,12 @@ legend {
   position: absolute;
   top: 30px;
   left: 230px;
+}
+
+
+.button_cargo {
+position: absolute;
+display: inline;
+top: 50px;
+left: 280px;
 }
