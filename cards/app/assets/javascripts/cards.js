@@ -35,6 +35,12 @@ function bindEvent() {
     jettisonCargo(this);
   })
 
+  $('.station_repair').click(function(event){
+    event.preventDefault();
+    console.log("repairing")
+
+  })
+
 };
 
 

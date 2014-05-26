@@ -9,6 +9,7 @@ class GamesController < ApplicationController
   end
 
   def play
+    session[:location]="space"
     @player = session[:player]
     @event_results = User.new
     round_housekeeping
@@ -74,6 +75,12 @@ class GamesController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+
+  def station
+    @player = session[:player]
+    flash[:notice] = "Docked at outpost."
   end
 
   def game_end
