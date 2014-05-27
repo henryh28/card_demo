@@ -41,13 +41,17 @@ class ApplicationController < ActionController::Base
 
     session[:buy_deck] = Deck.find_by_name("buy").cards.shuffle!
     session[:buy_hand] = session[:buy_deck].slice!(0..2)
+
+    session[:penalty_deck] = Card.where(card_type: "malfunction")
   end
 
 
   def tally_resources
     session[:player_hand].each do |card|
-      @player[:"#{card.effect}"] += card.modifier.to_i
-      @player[:"#{card.effect}"] = 10 if @player[:"#{card.effect}"] > 10
+      if card.card_type != "malfunction"
+        @player[:"#{card.effect}"] += card.modifier.to_i
+        @player[:"#{card.effect}"] = 10 if @player[:"#{card.effect}"] > 10
+      end
     end
   end
 
@@ -71,6 +75,7 @@ class ApplicationController < ActionController::Base
       hull_damage = damage_amount.to_i.abs - @player.shield
       @player.shield = 0
       @player.hull -= hull_damage
+      hull_damage.times { session[:player_discard].push(session[:penalty_deck].slice!(0)) }
     end
   end
 
@@ -136,11 +141,23 @@ class ApplicationController < ActionController::Base
    if @player.hull < session[:ship].max_hull && @player.credit >= 500
       @player.credit -= 500
       @player.hull += 1
+      remove_malfunction_card
       flash[:notice] = "Repaired 1 hull for 500 credits"
     elsif @player.hull >= session[:ship].max_hull
       flash[:notice] = "Hull at maximum"
     elsif @player.credit < 500
       flash[:notice] = "Insufficient credits for repair"
+    end
+  end
+
+
+  def remove_malfunction_card
+    if session[:player_hand].any? { |card| card.card_type == "malfunction" }
+      session[:player_hand].delete(session[:player_hand].find { |card| card.card_type == "malfunction"} )
+    elsif session[:player_discard].any? { |card| card.card_type == "malfunction" }
+      session[:player_discard].delete(session[:player_discard].find { |card| card.card_type == "malfunction"} )
+    else session[:player_deck].any? { |card| card.card_type == "malfunction" }
+      session[:player_deck].delete(session[:player_deck].find { |card| card.card_type == "malfunction"} )
     end
   end
 

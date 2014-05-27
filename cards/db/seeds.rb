@@ -38,14 +38,18 @@ main_medium = Deck.create(name: "main_medium", deck_type: "event")
 1.times { main_medium.cards.create(card_type: "bonus", effect: "cargo", modifier: "5", flavor_text: "An archaeological artifact!", cost: "2000") }
 
 
-
 buy = Deck.create(name: "buy", deck_type: "upgrades")
-3.times { buy.cards.create(card_type: "attack", effect: "attack", modifier: "2", flavor_text: "Green lasers!", cost: "4000") }
-3.times { buy.cards.create(card_type: "attack", effect: "attack", modifier: "3", flavor_text: "Purple lasers!", cost: "8000") }
-3.times { buy.cards.create(card_type: "equipment", effect: "shield", modifier: "2", flavor_text: "Rainbow happy shield", cost: "5000") }
-3.times { buy.cards.create(card_type: "resource", effect: "energy", modifier: "2", flavor_text: "I think it's working!", cost: "7000") }
-3.times { buy.cards.create(card_type: "resource", effect: "energy", modifier: "3", flavor_text: "How'd it do that?!", cost: "15000") }
+3.times { buy.cards.create(card_type: "attack", effect: "attack", modifier: "2", flavor_text: "Liquid Hydrogen Coolant System", cost: "4000") }
+3.times { buy.cards.create(card_type: "attack", effect: "attack", modifier: "3", flavor_text: "Solid Helium Coolant System", cost: "8000") }
+3.times { buy.cards.create(card_type: "equipment", effect: "shield", modifier: "2", flavor_text: "Mark II Shield Recharger", cost: "5000") }
+3.times { buy.cards.create(card_type: "equipment", effect: "shield", modifier: "2", flavor_text: "Mark III Shield Recharger", cost: "10000") }
+3.times { buy.cards.create(card_type: "resource", effect: "energy", modifier: "2", flavor_text: "Anti-Matter Power Plant", cost: "7000") }
+3.times { buy.cards.create(card_type: "resource", effect: "energy", modifier: "3", flavor_text: "Liquid Schwartz Generator", cost: "15000") }
+3.times { buy.cards.create(card_type: "resource", effect: "energy", modifier: "4", flavor_text: "0.01 Point Energy Generator", cost: "25000") }
 
+
+penalty = Deck.create(name: "debuff", deck_type: "penalty")
+20.times { penalty.cards.create(card_type: "malfunction", effect: "none", modifier: "0", flavor_text: "It's repairable.... Maybe?", cost: "2000") }
 
 
 
