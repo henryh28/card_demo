@@ -9,3 +9,40 @@ done - end of round tally of damage and rewards
 done for fail - implement game end conditions (success vs fail). stats persist from round to round
 
 done - add buyable deck, new equipment(seed file)
+
+done - can visit stations to repair hull
+
+done - can jettison cargo at space, and sell cargo at space stations
+
+pending - implement malfunction cards (seed file). given when hull damaged. removed during station repair
+
+done - cannot visit stations while enemy event cards on table.
+
+pending - implement missiles
+
+pending - impelement engine speed (number of cards flipped per turn) resolve singly.
+
+pending - implement crew size as starting hand. implement crew at space stations. hireable to increase hand size.
+
+pending - implement buyable energy at space stations
+
+pending - add more variety to disaster cards in event deck
+
+pending - add bounty target/boss cards to event deck
+
+pending - track winning condition.
+
+pending - update weapon cards to coolant cards. attack to heat level. shield cards to shield recharge rate.
+
+pending - starting customization screen. buy starting hand and equipment
+
+pending - ship component screen. buyable upgrade to weapon, shield, engines
+
+pending - update and differentiate different card types.
+   - dice rolls for combat?  simultaneous attack resolution or initiative.
+
+pending - mission computer. mission cards.
+
+pending - pilots with different skills/playstyles.  scout, barter, combat, engineer
+
+pending - turn tracker. game over by x turns. station visits count as turns

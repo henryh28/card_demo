@@ -5,22 +5,29 @@ class GamesController < ApplicationController
     @event_results = User.new
     initialize_player(session[:ship].attributes)
     initialize_system
-    render "play"
+    redirect_to games_process_round_path
   end
 
   def play
     session[:location]="space"
-    @event_results = User.new
-    round_housekeeping
-    redirect_to games_game_end_path if @player.hull < 1
-
-    player_hand_size = 5
-    event_hand_size = 3
 
     discard_cards
-    draw_new_cards("player_deck", "player_discard", "player_hand", player_hand_size)
-    draw_new_cards("event_deck", "event_discard", "event_hand", event_hand_size)
-    refresh_buy_deck?
+    draw_new_cards("player_deck", "player_discard", "player_hand", @player.crew)
+    draw_new_cards("event_deck", "event_discard", "event_hand", @player.speed)
+
+    tally_resources
+    event_tally
+
+    redirect_to games_process_round_path
+  end
+
+  def process_round
+    @event_results = User.new
+    if @player.hull < 1
+      redirect_to games_game_end_path and return
+    else
+      render "play"
+    end
   end
 
   def buy
@@ -54,7 +61,11 @@ class GamesController < ApplicationController
   def cargo
     @event_results = User.new
     @cargo_card = Card.find(params[:card])
-    loot_cargo if @cargo_card.effect == "cargo"
+    if enemy_present?
+      flash[:notice] = "Cannot safely loot cargo while enemies are present"
+    else
+      loot_cargo if @cargo_card.effect == "cargo"
+    end
 
     respond_to do |format|
       format.js
@@ -74,11 +85,17 @@ class GamesController < ApplicationController
 
 
   def station
-    session[:location] = "station"
-    if params[:service] == "repair"
-      repair_ship
+    if enemy_present? && session[:location] == "space"
+      flash[:notice] = "Cannot dock at stations while enemy is present"
+      redirect_to games_process_round_path
     else
-      flash[:notice] = "Docked at outpost."
+      refresh_buy_deck?
+      session[:location] = "station"
+      if params[:service] == "repair"
+        repair_ship
+      else
+        flash[:notice] = "Docked at outpost."
+      end
     end
   end
 
