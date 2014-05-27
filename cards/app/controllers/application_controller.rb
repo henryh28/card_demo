@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     @player.hull = shipstat_hash["max_hull"]
     @player.energy = shipstat_hash["max_energy"]
     @player.shield = shipstat_hash["max_shield"]
-    @player.crew = shipstat_hash["max_crew"]
+    @player.crew = 3
     @player.fuel = shipstat_hash["max_fuel"]
     @player.hardpoint = shipstat_hash["max_hardpoint"]
     @player.speed = shipstat_hash["max_speed"]
@@ -147,6 +147,19 @@ class ApplicationController < ActionController::Base
       flash[:notice] = "Hull at maximum"
     elsif @player.credit < 500
       flash[:notice] = "Insufficient credits for repair"
+    end
+  end
+
+
+  def hire_crew
+    if @player.crew < session[:ship].max_crew && @player.credit >= 3000
+      @player.credit -= 3000
+      @player.crew +=1
+      flash[:notice] = "Crew hired."
+    elsif @player.crew >= session[:ship].max_crew
+      flash[:notice] = "Crew quarters already at maximum capacity."
+    elsif @player.credit < 3000
+      flash[:notice] = "Sorry, I don't work for free."
     end
   end
 

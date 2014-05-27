@@ -94,6 +94,8 @@ class GamesController < ApplicationController
       session[:location] = "station"
       if params[:service] == "repair"
         repair_ship
+      elsif params[:service] == "hire"
+        hire_crew
       else
         flash[:notice] = "Docked at outpost."
       end

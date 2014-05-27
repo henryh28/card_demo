@@ -22,7 +22,7 @@ pending - implement missiles
 
 done - impelement engine speed (number of cards flipped per turn).
 
-pending - implement crew size as starting hand. implement crew at space stations. hireable to increase hand size.
+done - implement crew size as starting hand. implement crew at space stations. hireable to increase hand size.
 
 pending - implement buyable energy at space stations
 
