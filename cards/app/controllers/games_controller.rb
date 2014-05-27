@@ -10,10 +10,11 @@ class GamesController < ApplicationController
 
   def play
     session[:location]="space"
+    current_speed = params[:speed] ? params[:speed].to_i : @player.speed
 
     discard_cards
     draw_new_cards("player_deck", "player_discard", "player_hand", @player.crew)
-    draw_new_cards("event_deck", "event_discard", "event_hand", @player.speed)
+    draw_new_cards("event_deck", "event_discard", "event_hand", current_speed)
 
     tally_resources
     event_tally
