@@ -48,9 +48,11 @@ class ApplicationController < ActionController::Base
 
   def tally_resources
     session[:player_hand].each do |card|
-      if card.card_type != "malfunction"
+      max_charge_amount = session[:ship][:"max_#{card.effect}"] - @player[:"#{card.effect}"]
+      if (max_charge_amount >= 0) && (card.modifier.to_i < max_charge_amount) && (card.card_type != "malfunction")
         @player[:"#{card.effect}"] += card.modifier.to_i
-        @player[:"#{card.effect}"] = 10 if @player[:"#{card.effect}"] > 10
+      else
+        @player[:"#{card.effect}"] = session[:ship][:"max_#{card.effect}"]
       end
     end
   end
@@ -160,6 +162,19 @@ class ApplicationController < ActionController::Base
       flash[:notice] = "Crew quarters already at maximum capacity."
     elsif @player.credit < 3000
       flash[:notice] = "Sorry, I don't work for free."
+    end
+  end
+
+
+  def recharge_energy
+    if @player.energy < session[:ship].max_energy && @player.credit >= 250
+      @player.credit -= 250
+      @player.energy +=1
+      flash[:notice] = "Recharged 1 unit of energy."
+    elsif @player.energy >= session[:ship].max_energy
+      flash[:notice] = "Power reserves full."
+    elsif @player.credit < 250
+      flash[:notice] = "No freebies"
     end
   end
 

@@ -24,7 +24,7 @@ done - impelement engine speed (number of cards flipped per turn).
 
 done - implement crew size as starting hand. implement crew at space stations. hireable to increase hand size.
 
-pending - implement buyable energy at space stations
+done - implement buyable energy at space stations
 
 pending - add more variety to disaster cards in event deck
 

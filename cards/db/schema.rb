@@ -44,14 +44,15 @@ ActiveRecord::Schema.define(:version => 20140523162105) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "ships", :force => true do |t|
-    t.integer  "max_energy",    :default => 5
-    t.integer  "max_shield",    :default => 5
+    t.integer  "max_energy",    :default => 10
+    t.integer  "max_shield",    :default => 7
     t.integer  "max_hardpoint", :default => 1
     t.integer  "max_speed",     :default => 2
     t.integer  "max_fuel",      :default => 3
     t.integer  "max_crew",      :default => 4
     t.integer  "max_hull",      :default => 5
     t.integer  "max_cargo",     :default => 10
+    t.integer  "max_attack",    :default => 5
     t.text     "cargo_bay"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false

@@ -96,6 +96,8 @@ class GamesController < ApplicationController
         repair_ship
       elsif params[:service] == "hire"
         hire_crew
+      elsif params[:service] == "recharge"
+        recharge_energy
       else
         flash[:notice] = "Docked at outpost."
       end
