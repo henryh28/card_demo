@@ -14,13 +14,13 @@ done - can visit stations to repair hull
 
 done - can jettison cargo at space, and sell cargo at space stations
 
-pending - implement malfunction cards (seed file). given when hull damaged. removed during station repair
+done - implement malfunction cards (seed file). given when hull damaged. removed during station repair
 
 done - cannot visit stations while enemy event cards on table.
 
 pending - implement missiles
 
-pending - impelement engine speed (number of cards flipped per turn) resolve singly.
+done - impelement engine speed (number of cards flipped per turn).
 
 pending - implement crew size as starting hand. implement crew at space stations. hireable to increase hand size.
 

@@ -3,4 +3,4 @@ $('.buy_area').replaceWith('<%= escape_javascript(render(:partial => 'shared/buy
 $('.resource_hud').replaceWith('<%= escape_javascript(render(:partial => 'shared/resource_hud')) %>' )
 $('.debug').replaceWith('<%= escape_javascript(render(:partial => 'shared/dev_debug', :locals => { :notes => "none"})) %>' )
 $('.system_message').replaceWith('<%= escape_javascript(render(:partial => 'shared/system_message')) %>')
-  bindEvent();
+  bindStationEvent();

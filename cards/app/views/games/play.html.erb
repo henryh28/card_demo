@@ -3,12 +3,12 @@
 <%= render "shared/player_area" %>
 <%= render "shared/cargo_bay" %>
 
-<%= link_to "Play hand", games_play_path, method: :post, :class => "link_button" %>
-<%= link_to "Station", games_station_path, :class => "link_button" %>
+<%= form_tag(games_play_path) do %>
+  <%= select_tag "speed", options_for_select( 1..@player.speed, @player.speed ) %>
+  <%= submit_tag "Play Hand", :class => "link_button" %>
+  <%= link_to "Station", games_station_path, :class => "link_button" %>
+  <%= link_to "Home", root_path, class: "link_button", data: { confirm: "Quit game?" }%>
+<% end %>
 
-<%= link_to "Home", root_path, class: "link_button", data: { confirm: "Quit game?" }%>
-
-<%= render "shared/system_message" %>
-
-<br>
+<%= render "shared/system_message" %><br>
 <%= render "shared/dev_debug" %>
