@@ -16,5 +16,6 @@ Cards::Application.routes.draw do
   get "games/jettison", :to => "games#jettison"
   get "games/station", :to => "games#station"
   get "games/sell", :to => "games#sell"
+  get "games/process_round", :to => "games#process_round"
 
 end

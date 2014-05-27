@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
 
     session[:player_discard] = []
     session[:player_deck] = Deck.find_by_name("starting").cards.shuffle!
-    session[:player_hand] = session[:player_deck].slice!(0..4)
+    session[:player_hand] = session[:player_deck].slice!(0..(@player.crew-1))
   end
 
 
@@ -37,16 +37,29 @@ class ApplicationController < ActionController::Base
     easy_deck = Deck.find_by_name("main_easy").cards.shuffle!
     medium_deck = Deck.find_by_name("main_medium").cards.shuffle!
     session[:event_deck] = easy_deck + medium_deck
-    session[:event_hand] = session[:event_deck].slice!(0..2)
+    session[:event_hand] = session[:event_deck].slice!(0..(@player.speed-1))
 
     session[:buy_deck] = Deck.find_by_name("buy").cards.shuffle!
     session[:buy_hand] = session[:buy_deck].slice!(0..2)
   end
 
 
-  def round_housekeeping
+  def tally_resources
+    session[:player_hand].each do |card|
+      @player[:"#{card.effect}"] += card.modifier.to_i
+      @player[:"#{card.effect}"] = 10 if @player[:"#{card.effect}"] > 10
+    end
+  end
+
+
+  def event_tally
     session[:event_hand].each do |card|
-      damage_ship(card.modifier) if card.effect == "hull"
+      if card.effect == "energy" || card.effect == "credit"
+        @player[:"#{card.effect}"] += card.modifier.to_i
+        @player[:"#{card.effect}"] = 0 if @player[:"#{card.effect}"] < 1 && card.effect != "credit"
+      elsif card.effect == "hull"
+        damage_ship(card.modifier)
+      end
     end
   end
 
@@ -130,5 +143,11 @@ class ApplicationController < ActionController::Base
       flash[:notice] = "Insufficient credits for repair"
     end
   end
+
+
+  def enemy_present?
+    session[:event_hand].any? { |card| card.card_type == "enemy"}
+  end
+
 
 end
