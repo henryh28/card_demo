@@ -47,11 +47,12 @@ class ApplicationController < ActionController::Base
 
 
   def tally_resources
+    player_stats = ["attack", "energy", "shield"]
     session[:player_hand].each do |card|
-      max_charge_amount = session[:ship][:"max_#{card.effect}"] - @player[:"#{card.effect}"]
-      if (max_charge_amount >= 0) && (card.modifier.to_i < max_charge_amount) && (card.card_type != "malfunction")
+      max_charge_amount = player_stats.include?(card.effect) ? session[:ship][:"max_#{card.effect}"] - @player[:"#{card.effect}"] : 0
+      if (max_charge_amount >= 0) && (card.modifier.to_i < max_charge_amount) && player_stats.include?(card.effect)
         @player[:"#{card.effect}"] += card.modifier.to_i
-      else
+      elsif player_stats.include?(card.effect)
         @player[:"#{card.effect}"] = session[:ship][:"max_#{card.effect}"]
       end
     end
