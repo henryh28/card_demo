@@ -1,3 +1,8 @@
-you lose<br>
+
+<% if session[:game_status] == "lost" %>
+  you lose<br>
+<% elsif session[:game_status] == "win" %>
+  You win!<br>
+<% end %>
 
 <%= link_to "Home", root_path %>

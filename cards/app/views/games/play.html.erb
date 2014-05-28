@@ -8,6 +8,7 @@
   <%= submit_tag "Play Hand", :class => "link_button" %>
   <%= link_to "Station", games_station_path, :class => "link_button" %>
   <%= link_to "Home", root_path, class: "link_button", data: { confirm: "Quit game?" }%>
+  Current turn: <%= @player.round %> / <%= session[:game_round_limit] %>
 <% end %>
 
 <%= render "shared/system_message" %><br>

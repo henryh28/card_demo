@@ -16,6 +16,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :attack, :default => "0"
       t.integer :cargo, :default => "0"
       t.text :cargo_bay
+      t.integer :round, :default => "0"
 
       t.timestamps
     end
