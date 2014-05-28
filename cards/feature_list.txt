@@ -30,13 +30,13 @@ pending - add more variety to disaster cards in event deck
 
 pending - add bounty target/boss cards to event deck
 
-pending - track winning condition.
+done - track winning condition.
 
 pending - update weapon cards to coolant cards. attack to heat level. shield cards to shield recharge rate.
 
 pending - starting customization screen. buy starting hand and equipment
 
-pending - ship component screen. buyable upgrade to weapon, shield, engines
+50% - ship component screen. buyable upgrade to weapon, shield, engines
 
 pending - update and differentiate different card types.
    - dice rolls for combat?  simultaneous attack resolution or initiative.
@@ -46,3 +46,5 @@ pending - mission computer. mission cards.
 pending - pilots with different skills/playstyles.  scout, barter, combat, engineer
 
 done - turn tracker. game over by x turns. station visits count as turns
+
+pending - tune deck. tune mechanic. tune all the things.

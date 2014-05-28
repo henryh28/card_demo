@@ -11,6 +11,7 @@
   end
 
   def play
+    discard_cards
     round_housekeeping
 
     redirect_to games_process_round_path
@@ -34,7 +35,13 @@
     else
       @player.credit -= buy_card.cost.to_i
       flash[:notice] = "bought card"
-      session[:player_discard].push session[:buy_hand].delete(Card.find(params[:card]))
+      if buy_card.card_type != "ship_upgrade"
+        session[:player_discard].push(session[:buy_hand].delete(Card.find(params[:card])))
+      elsif buy_card.card_type == "ship_upgrade"
+        session[:ship][:"max_#{buy_card.effect}"] = buy_card.modifier.to_i
+        @player[:"#{buy_card.effect}"] = buy_card.modifier.to_i
+        session[:buy_hand].delete(Card.find(params[:card]))
+      end
     end
 
     respond_to do |format|
@@ -85,7 +92,7 @@
       flash[:notice] = "Cannot dock at stations while enemy is present"
       redirect_to games_process_round_path
     else
-      refresh_buy_deck?
+      refresh_buy_deck if session[:location] == "space"
       @player.round += 1 if session[:location] == "space"
       session[:location] = "station"
       if params[:service] == "repair"

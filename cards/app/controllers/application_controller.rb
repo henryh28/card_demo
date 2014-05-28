@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     @player.fuel = shipstat_hash["max_fuel"]
     @player.hardpoint = shipstat_hash["max_hardpoint"]
     @player.speed = shipstat_hash["max_speed"]
-    @player.credit = 0
+    @player.credit = 45000
     @player.cargo_bay = shipstat_hash["cargo_bay"]
     @player.cargo = 0
     @player.cargo_bay = []
@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
 
     easy_deck = Deck.find_by_name("main_easy").cards.shuffle!
     medium_deck = Deck.find_by_name("main_medium").cards.shuffle!
-    session[:event_deck] = easy_deck + medium_deck
+    session[:event_deck] = easy_deck.drop(5) + medium_deck.drop(5)
     session[:event_hand] = session[:event_deck].slice!(0..(@player.speed-1))
 
     session[:buy_deck] = Deck.find_by_name("buy").cards.shuffle!
@@ -51,7 +51,6 @@ class ApplicationController < ActionController::Base
     session[:location]="space"
     current_speed = params[:speed] ? params[:speed].to_i : @player.speed
 
-    discard_cards
     draw_new_cards("player_deck", "player_discard", "player_hand", @player.crew)
     draw_new_cards("event_deck", "event_discard", "event_hand", current_speed)
 
@@ -117,11 +116,9 @@ class ApplicationController < ActionController::Base
   end
 
 
-  def refresh_buy_deck?
-    if session[:buy_hand].size < 3 && session[:buy_deck].size > 3
-      draw_amount = 3 - session[:buy_hand].size
-      draw_amount.times { session[:buy_hand].push(session[:buy_deck].slice!(0)) }
-    end
+  def refresh_buy_deck
+    (session[:buy_discard] += session[:buy_hand]).uniq
+    draw_new_cards("buy_deck", "buy_discard", "buy_hand", 3)
   end
 
 
@@ -212,7 +209,7 @@ class ApplicationController < ActionController::Base
 
 
   def game_over?
-    if @player.credit > 25000
+    if @player.credit > 50000
       session[:game_status] = "win"
     elsif @player.hull < 1 || @player.round >= session[:game_round_limit].to_i
       session[:game_status] = "lost"
