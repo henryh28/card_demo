@@ -20,6 +20,11 @@ function bindEvent() {
     jettisonCargo(this);
   })
 
+  $('.shield_charger_card').click(function(event){
+    rechargeShield(this);
+  })
+
+
 };
 
 
@@ -61,6 +66,16 @@ function jettisonCargo(card) {
   var cardId = $(card).find("#card_id").val();
   $.ajax({
     url: '/games/jettison',
+    type: 'get',
+    data: { card: cardId }
+  })
+}
+
+
+function rechargeShield(card) {
+  var cardId = $(card).find("#card_id").val();
+  $.ajax({
+    url: '/games/shield_up',
     type: 'get',
     data: { card: cardId }
   })

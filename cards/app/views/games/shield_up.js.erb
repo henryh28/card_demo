@@ -1,0 +1,5 @@
+console.log("Shield capacitor charged")
+$('.player_area').replaceWith('<%= escape_javascript(render(:partial => 'shared/player_area')) %>')
+$('.resource_hud').replaceWith('<%= escape_javascript(render(:partial => 'shared/resource_hud')) %>')
+$('.system_message').replaceWith('<%= escape_javascript(render(:partial => 'shared/system_message')) %>')
+bindEvent();
