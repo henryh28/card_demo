@@ -36,6 +36,9 @@
   <% session[:buy_deck].each do |card| %>
     <%= card.id %>,
   <% end %><br>
+   <% session[:buy_discard].each do |card| %>
+    <%= card.id %>,
+  <% end %><br>
   =======================================<br>
 
 </fieldset>

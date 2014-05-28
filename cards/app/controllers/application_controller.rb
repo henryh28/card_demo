@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_player
 
+# -------------------- System Related -----------------
   def set_player
     @player = session[:player] if session[:player]
   end
@@ -19,7 +20,7 @@ class ApplicationController < ActionController::Base
     @player.fuel = shipstat_hash["max_fuel"]
     @player.hardpoint = shipstat_hash["max_hardpoint"]
     @player.speed = shipstat_hash["max_speed"]
-    @player.credit = 0
+    @player.credit = 10000
     @player.cargo_bay = shipstat_hash["cargo_bay"]
     @player.cargo = 0
     @player.cargo_bay = []
@@ -36,7 +37,7 @@ class ApplicationController < ActionController::Base
 
     easy_deck = Deck.find_by_name("main_easy").cards.shuffle!
     medium_deck = Deck.find_by_name("main_medium").cards.shuffle!
-    session[:event_deck] = easy_deck + medium_deck
+    session[:event_deck] = easy_deck.drop(5) + medium_deck.drop(5)
     session[:event_hand] = session[:event_deck].slice!(0..(@player.speed-1))
 
     session[:buy_deck] = Deck.find_by_name("buy").cards.shuffle!
@@ -47,16 +48,47 @@ class ApplicationController < ActionController::Base
   end
 
 
+  def game_over?
+    if @player.credit > 50000
+      session[:game_status] = "win"
+    elsif @player.hull < 1 || @player.round >= session[:game_round_limit].to_i
+      session[:game_status] = "lost"
+    else
+      session[:game_status] = "continue"
+    end
+  end
+
+# -------------------- Round Upkeep -----------------
   def round_housekeeping
+    discard_cards
     session[:location]="space"
     current_speed = params[:speed] ? params[:speed].to_i : @player.speed
 
-    discard_cards
     draw_new_cards("player_deck", "player_discard", "player_hand", @player.crew)
     draw_new_cards("event_deck", "event_discard", "event_hand", current_speed)
 
     tally_resources
     event_tally
+  end
+
+
+  def discard_cards
+    (session[:player_discard] += session[:player_hand]).uniq
+    (session[:event_discard] += session[:event_hand]).uniq
+    @player.round += 1
+  end
+
+
+  def draw_new_cards(deck, discard, hand, hand_size)
+    if session[:"#{deck}"].size >= hand_size
+      session[:"#{hand}"] = session[:"#{deck}"].slice!(0..(hand_size-1))
+    else
+      draw_amount = hand_size - session[:"#{deck}"].size
+      session[:"#{hand}"] = session[:"#{deck}"].slice!(0..-1)
+      session[:"#{deck}"] = session[:"#{discard}"].shuffle!
+      draw_amount.times { session[:"#{hand}"].push(session[:"#{deck}"].slice!(0)) }
+      session[:"#{discard}"] = []
+    end
   end
 
 
@@ -85,6 +117,7 @@ class ApplicationController < ActionController::Base
   end
 
 
+# -------------------- Space Events -----------------
   def damage_ship(damage_amount)
     if damage_amount.to_i.abs < @player.shield
       @player.shield += damage_amount.to_i
@@ -93,34 +126,6 @@ class ApplicationController < ActionController::Base
       @player.shield = 0
       @player.hull -= hull_damage
       hull_damage.times { session[:player_discard].push(session[:penalty_deck].slice!(0)) }
-    end
-  end
-
-
-  def discard_cards
-    (session[:player_discard] += session[:player_hand]).uniq
-    (session[:event_discard] += session[:event_hand]).uniq
-    @player.round += 1
-  end
-
-
-  def draw_new_cards(deck, discard, hand, hand_size)
-    if session[:"#{deck}"].size >= hand_size
-      session[:"#{hand}"] = session[:"#{deck}"].slice!(0..(hand_size-1))
-    else
-      draw_amount = hand_size - session[:"#{deck}"].size
-      session[:"#{hand}"] = session[:"#{deck}"].slice!(0..-1)
-      session[:"#{deck}"] = session[:"#{discard}"].shuffle!
-      draw_amount.times { session[:"#{hand}"].push(session[:"#{deck}"].slice!(0)) }
-      session[:"#{discard}"] = []
-    end
-  end
-
-
-  def refresh_buy_deck?
-    if session[:buy_hand].size < 3 && session[:buy_deck].size > 3
-      draw_amount = 3 - session[:buy_hand].size
-      draw_amount.times { session[:buy_hand].push(session[:buy_deck].slice!(0)) }
     end
   end
 
@@ -138,6 +143,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
   def power_check(needed_power)
     @player.energy >= needed_power
   end
@@ -152,6 +158,18 @@ class ApplicationController < ActionController::Base
     else
       flash[:notice] = "Not enough room in cargo bay"
     end
+  end
+
+
+  def enemy_present?
+    session[:event_hand].any? { |card| card.card_type == "enemy"}
+  end
+
+
+# -------------------- Station Activities -----------------
+  def refresh_buy_deck
+    (session[:buy_discard] += session[:buy_hand]).uniq
+    draw_new_cards("buy_deck", "buy_discard", "buy_hand", 3)
   end
 
 
@@ -204,22 +222,5 @@ class ApplicationController < ActionController::Base
       session[:player_deck].delete(session[:player_deck].find { |card| card.card_type == "malfunction"} )
     end
   end
-
-
-  def enemy_present?
-    session[:event_hand].any? { |card| card.card_type == "enemy"}
-  end
-
-
-  def game_over?
-    if @player.credit > 25000
-      session[:game_status] = "win"
-    elsif @player.hull < 1 || @player.round >= session[:game_round_limit].to_i
-      session[:game_status] = "lost"
-    else
-      session[:game_status] = "continue"
-    end
-  end
-
 
 end
