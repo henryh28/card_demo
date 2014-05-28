@@ -43,6 +43,20 @@ class ApplicationController < ActionController::Base
     session[:buy_hand] = session[:buy_deck].slice!(0..2)
 
     session[:penalty_deck] = Card.where(card_type: "malfunction")
+    session[:game_round_limit] = 50
+  end
+
+
+  def round_housekeeping
+    session[:location]="space"
+    current_speed = params[:speed] ? params[:speed].to_i : @player.speed
+
+    discard_cards
+    draw_new_cards("player_deck", "player_discard", "player_hand", @player.crew)
+    draw_new_cards("event_deck", "event_discard", "event_hand", current_speed)
+
+    tally_resources
+    event_tally
   end
 
 
@@ -86,6 +100,7 @@ class ApplicationController < ActionController::Base
   def discard_cards
     (session[:player_discard] += session[:player_hand]).uniq
     (session[:event_discard] += session[:event_hand]).uniq
+    @player.round += 1
   end
 
 
@@ -193,6 +208,17 @@ class ApplicationController < ActionController::Base
 
   def enemy_present?
     session[:event_hand].any? { |card| card.card_type == "enemy"}
+  end
+
+
+  def game_over?
+    if @player.credit > 25000
+      session[:game_status] = "win"
+    elsif @player.hull < 1 || @player.round >= session[:game_round_limit].to_i
+      session[:game_status] = "lost"
+    else
+      session[:game_status] = "continue"
+    end
   end
 
 

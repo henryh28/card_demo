@@ -45,4 +45,4 @@ pending - mission computer. mission cards.
 
 pending - pilots with different skills/playstyles.  scout, barter, combat, engineer
 
-pending - turn tracker. game over by x turns. station visits count as turns
+done - turn tracker. game over by x turns. station visits count as turns

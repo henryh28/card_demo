@@ -1,30 +1,25 @@
-class GamesController < ApplicationController
+ class GamesController < ApplicationController
 
   def new
     session[:ship] = Ship.new
     @event_results = User.new
     initialize_player(session[:ship].attributes)
     initialize_system
+    round_housekeeping
+
     redirect_to games_process_round_path
   end
 
   def play
-    session[:location]="space"
-    current_speed = params[:speed] ? params[:speed].to_i : @player.speed
-
-    discard_cards
-    draw_new_cards("player_deck", "player_discard", "player_hand", @player.crew)
-    draw_new_cards("event_deck", "event_discard", "event_hand", current_speed)
-
-    tally_resources
-    event_tally
+    round_housekeeping
 
     redirect_to games_process_round_path
   end
 
   def process_round
     @event_results = User.new
-    if @player.hull < 1
+    game_over?
+    if session[:game_status] != "continue"
       redirect_to games_game_end_path and return
     else
       render "play"
@@ -91,6 +86,7 @@ class GamesController < ApplicationController
       redirect_to games_process_round_path
     else
       refresh_buy_deck?
+      @player.round += 1 if session[:location] == "space"
       session[:location] = "station"
       if params[:service] == "repair"
         repair_ship
