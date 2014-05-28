@@ -93,7 +93,7 @@ class ApplicationController < ActionController::Base
 
 
   def tally_resources
-    player_stats = ["attack", "energy", "shield"]
+    player_stats = ["attack", "energy"]
     session[:player_hand].each do |card|
       max_charge_amount = player_stats.include?(card.effect) ? session[:ship][:"max_#{card.effect}"] - @player[:"#{card.effect}"] : 0
       if (max_charge_amount >= 0) && (card.modifier.to_i < max_charge_amount) && player_stats.include?(card.effect)
@@ -193,7 +193,7 @@ class ApplicationController < ActionController::Base
       @player.crew +=1
       flash[:notice] = "Crew hired."
     elsif @player.crew >= session[:ship].max_crew
-      flash[:notice] = "Crew quarters already at maximum capacity."
+      flash[:notice] = "Ship berth at maximum capacity."
     elsif @player.credit < 3000
       flash[:notice] = "Sorry, I don't work for free."
     end
@@ -201,12 +201,25 @@ class ApplicationController < ActionController::Base
 
 
   def recharge_energy
-    if @player.energy < session[:ship].max_energy && @player.credit >= 250
-      @player.credit -= 250
+    if @player.energy < session[:ship].max_energy && @player.credit >= 100
+      @player.credit -= 100
       @player.energy +=1
       flash[:notice] = "Recharged 1 unit of energy."
     elsif @player.energy >= session[:ship].max_energy
       flash[:notice] = "Power reserves full."
+    elsif @player.credit < 100
+      flash[:notice] = "No freebies"
+    end
+  end
+
+
+  def recharge_shield
+    if @player.shield < session[:ship].max_shield && @player.credit >= 250
+      @player.credit -= 250
+      @player.shield +=1
+      flash[:notice] = "Shield capacitor charged by 1 unit."
+    elsif @player.shield >= session[:ship].max_shield
+      flash[:notice] = "Shield capacitor at maximum."
     elsif @player.credit < 250
       flash[:notice] = "No freebies"
     end

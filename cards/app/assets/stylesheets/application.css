@@ -101,7 +101,7 @@ td {
 
 .player_card, .buyable_cards, .event_cards,
 .enemy_cards, .cargo_cards, .space_cargos,
-.station_cargos {
+.station_cargos, .shield_charger_card {
   display: inline-block;
   position: relative;
   border: 1px solid lightslategray;

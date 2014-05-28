@@ -32,7 +32,7 @@ pending - add bounty target/boss cards to event deck
 
 done - track winning condition.
 
-pending - update weapon cards to coolant cards. attack to heat level. shield cards to shield recharge rate.
+done - update weapon cards to coolant cards. attack to heat level. shield cards to shield recharge rate.
 
 pending - starting customization screen. buy starting hand and equipment
 
@@ -46,5 +46,7 @@ pending - mission computer. mission cards.
 pending - pilots with different skills/playstyles.  scout, barter, combat, engineer
 
 done - turn tracker. game over by x turns. station visits count as turns
+
+done - shield charging requires energy.  Adds shield recharge service to stations.
 
 pending - tune deck. tune mechanic. tune all the things.

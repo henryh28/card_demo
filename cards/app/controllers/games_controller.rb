@@ -1,21 +1,26 @@
  class GamesController < ApplicationController
 
+# -------------------- System Related -----------------
   def new
     session[:ship] = Ship.new
     @event_results = User.new
     initialize_player(session[:ship].attributes)
     initialize_system
     round_housekeeping
-
     redirect_to games_process_round_path
   end
+
 
   def play
     round_housekeeping
-
     redirect_to games_process_round_path
   end
 
+
+  def game_end
+  end
+
+# -------------------- Round Upkeep -----------------
   def process_round
     @event_results = User.new
     game_over?
@@ -26,22 +31,11 @@
     end
   end
 
-  def buy
+# -------------------- Space Events -----------------
+  def event
     @event_results = User.new
-    buy_card = Card.find(params[:card])
-    if buy_card.cost.to_i > @player.credit
-      flash[:notice] = "not enough cash. buy cancelled"
-    else
-      @player.credit -= buy_card.cost.to_i
-      flash[:notice] = "bought card"
-      if buy_card.card_type != "ship_upgrade"
-        session[:player_discard].push(session[:buy_hand].delete(Card.find(params[:card])))
-      elsif buy_card.card_type == "ship_upgrade"
-        session[:ship][:"max_#{buy_card.effect}"] = buy_card.modifier.to_i
-        @player[:"#{buy_card.effect}"] = buy_card.modifier.to_i
-        session[:buy_hand].delete(Card.find(params[:card]))
-      end
-    end
+    @event_card = Card.find(params[:card])
+    compute_attack if @event_card.card_type == "enemy"
 
     respond_to do |format|
       format.js
@@ -49,10 +43,20 @@
   end
 
 
-  def event
-    @event_results = User.new
-    @event_card = Card.find(params[:card])
-    compute_attack if @event_card.card_type == "enemy"
+  def shield_up
+    card = Card.find(params[:card])
+    if @player.energy >= 1 && card.effect == "shield"
+      charge_amount = card.modifier.to_i
+      until charge_amount <= 0 || @player.shield >= session[:ship].max_shield do
+         @player.energy -= 1
+         charge_amount -= 1
+         @player.shield += 1
+      end
+      flash[:notice] = "Shield capacitor now at #{@player.shield} units"
+      session[:player_hand].delete(card)
+    else
+      flash[:notice] = "Not enough energy to charge shields"
+    end
 
     respond_to do |format|
       format.js
@@ -85,7 +89,7 @@
     end
   end
 
-
+# -------------------- Station Activities -----------------
   def station
     if enemy_present? && session[:location] == "space"
       flash[:notice] = "Cannot dock at stations while enemy is present"
@@ -100,9 +104,34 @@
         hire_crew
       elsif params[:service] == "recharge"
         recharge_energy
+      elsif params[:service] == "shield"
+        recharge_shield
       else
         flash[:notice] = "Docked at outpost."
       end
+    end
+  end
+
+
+  def buy
+    @event_results = User.new
+    buy_card = Card.find(params[:card])
+    if buy_card.cost.to_i > @player.credit
+      flash[:notice] = "not enough cash. buy cancelled"
+    else
+      @player.credit -= buy_card.cost.to_i
+      flash[:notice] = "bought card"
+      if buy_card.card_type != "ship_upgrade"
+        session[:player_discard].push(session[:buy_hand].delete(Card.find(params[:card])))
+      elsif buy_card.card_type == "ship_upgrade"
+        session[:ship][:"max_#{buy_card.effect}"] = buy_card.modifier.to_i
+        @player[:"#{buy_card.effect}"] = buy_card.modifier.to_i
+        session[:buy_hand].delete(Card.find(params[:card]))
+      end
+    end
+
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -117,10 +146,6 @@
     respond_to do |format|
       format.js
     end
-  end
-
-
-  def game_end
   end
 
 end
