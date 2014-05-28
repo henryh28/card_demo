@@ -7,9 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 starting = Deck.create(name: "starting", deck_type: "player")
-4.times { starting.cards.create(card_type: "equipment", effect: "energy", modifier: "1", flavor_text: "starting engine", cost: "0") }
-4.times { starting.cards.create(card_type: "attack", effect: "attack", modifier: "1", flavor_text: "Lasers!  pew pew!", cost: "0") }
-4.times { starting.cards.create(card_type: "equipment", effect: "shield", modifier: "1", flavor_text: "Shields up!", cost: "0") }
+4.times { starting.cards.create(card_type: "equipment", effect: "energy", modifier: "1", flavor_text: "Stock power plant", cost: "0") }
+4.times { starting.cards.create(card_type: "equipment", effect: "attack", modifier: "1", flavor_text: "Stock coolant for weapons system", cost: "0") }
+4.times { starting.cards.create(card_type: "equipment", effect: "shield", modifier: "1", flavor_text: "Stock shield regenerator", cost: "0") }
 
 
 main_easy = Deck.create(name: "main_easy", deck_type: "event")
@@ -39,13 +39,13 @@ main_medium = Deck.create(name: "main_medium", deck_type: "event")
 
 
 buy = Deck.create(name: "buy", deck_type: "upgrades")
-3.times { buy.cards.create(card_type: "attack", effect: "attack", modifier: "2", flavor_text: "Liquid Hydrogen Coolant System", cost: "4000") }
-2.times { buy.cards.create(card_type: "attack", effect: "attack", modifier: "3", flavor_text: "Solid Helium Coolant System", cost: "8000") }
+3.times { buy.cards.create(card_type: "equipment", effect: "attack", modifier: "2", flavor_text: "Liquid Hydrogen Coolant System", cost: "4000") }
+2.times { buy.cards.create(card_type: "equipment", effect: "attack", modifier: "3", flavor_text: "Solid Helium Coolant System", cost: "8000") }
 3.times { buy.cards.create(card_type: "equipment", effect: "shield", modifier: "2", flavor_text: "Mark II Shield Recharger", cost: "5000") }
 2.times { buy.cards.create(card_type: "equipment", effect: "shield", modifier: "2", flavor_text: "Mark III Shield Recharger", cost: "10000") }
-3.times { buy.cards.create(card_type: "resource", effect: "energy", modifier: "2", flavor_text: "Anti-Matter Power Plant", cost: "7000") }
-2.times { buy.cards.create(card_type: "resource", effect: "energy", modifier: "3", flavor_text: "Unobtainium Converter", cost: "15000") }
-2.times { buy.cards.create(card_type: "resource", effect: "energy", modifier: "4", flavor_text: "0.01 Point Energy Generator", cost: "25000") }
+3.times { buy.cards.create(card_type: "equipment", effect: "energy", modifier: "2", flavor_text: "Anti-Matter Power Plant", cost: "7000") }
+2.times { buy.cards.create(card_type: "equipment", effect: "energy", modifier: "3", flavor_text: "Unobtainium Converter", cost: "15000") }
+2.times { buy.cards.create(card_type: "equipment", effect: "energy", modifier: "4", flavor_text: "0.01 Point Energy Generator", cost: "25000") }
 3.times { buy.cards.create(card_type: "ship_upgrade", effect: "speed", modifier: "3", flavor_text: "General Neutronics Mk. VI", cost: "10000") }
 2.times { buy.cards.create(card_type: "ship_upgrade", effect: "speed", modifier: "4", flavor_text: "Interstellar Defense & Kinetics, T-38", cost: "20000") }
 3.times { buy.cards.create(card_type: "ship_upgrade", effect: "hull", modifier: "7", flavor_text: "Amorphic Meta-diamonoid reactive foam", cost: "7500") }

@@ -11,7 +11,6 @@
   end
 
   def play
-    discard_cards
     round_housekeeping
 
     redirect_to games_process_round_path
