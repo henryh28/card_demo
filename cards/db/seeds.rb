@@ -13,12 +13,12 @@ starting = Deck.create(name: "starting", deck_type: "player")
 
 
 main_easy = Deck.create(name: "main_easy", deck_type: "event")
-8.times { main_easy.cards.create(card_type: "enemy", effect: "hull", modifier: "-1", flavor_text: "You cut me off!  Space road rage!", cost: "500") }
-6.times { main_easy.cards.create(card_type: "enemy", effect: "hull", modifier: "-2", flavor_text: "a_space_pirate_01 appears!", cost: "1000") }
-3.times { main_easy.cards.create(card_type: "enemy", effect: "hull", modifier: "-3", flavor_text: "You'll never take me alive copper!", cost: "1500") }
+10.times { main_easy.cards.create(card_type: "enemy", effect: "hull", modifier: "-1", flavor_text: "You cut me off!  Space road rage!", cost: "1000") }
+7.times { main_easy.cards.create(card_type: "enemy", effect: "hull", modifier: "-2", flavor_text: "a_space_pirate_01 appears!", cost: "2000") }
+3.times { main_easy.cards.create(card_type: "enemy", effect: "hull", modifier: "-3", flavor_text: ".....", cost: "3000") }
 5.times { main_easy.cards.create(card_type: "peace", effect: "none", modifier: "0", flavor_text: "Radar clear!", cost: "0") }
 2.times { main_easy.cards.create(card_type: "penalty", effect: "energy", modifier: "-2", flavor_text: "Regular engine maintenance could have prevented this", cost: "0") }
-2.times { main_easy.cards.create(card_type: "penalty", effect: "credit", modifier: "-1500", flavor_text: "Space IRS.  It's a thing.", cost: "1500") }
+2.times { main_easy.cards.create(card_type: "penalty", effect: "credit", modifier: "-500", flavor_text: "Toll charge for Jumpgate useage", cost: "1500") }
 2.times { main_easy.cards.create(card_type: "bonus", effect: "cargo", modifier: "1", flavor_text: "Medical supplies", cost: "300") }
 2.times { main_easy.cards.create(card_type: "bonus", effect: "cargo", modifier: "1", flavor_text: "Retail goods", cost: "100") }
 1.times { main_easy.cards.create(card_type: "bonus", effect: "cargo", modifier: "3", flavor_text: "Replacement ship parts", cost: "700") }
@@ -26,16 +26,35 @@ main_easy = Deck.create(name: "main_easy", deck_type: "event")
 
 
 main_medium = Deck.create(name: "main_medium", deck_type: "event")
-6.times { main_medium.cards.create(card_type: "enemy", effect: "hull", modifier: "-1", flavor_text: "You cut me off!  Space road rage!", cost: "500") }
-8.times { main_medium.cards.create(card_type: "enemy", effect: "hull", modifier: "-2", flavor_text: "a_space_pirate_01 appears!", cost: "1000") }
-5.times { main_medium.cards.create(card_type: "enemy", effect: "hull", modifier: "-3", flavor_text: "Your money and your life", cost: "2500") }
+6.times { main_medium.cards.create(card_type: "enemy", effect: "hull", modifier: "-1", flavor_text: "You cut me off!  Space road rage!", cost: "1000") }
+8.times { main_medium.cards.create(card_type: "enemy", effect: "hull", modifier: "-2", flavor_text: "a_space_pirate_01 appears!", cost: "2000") }
+5.times { main_medium.cards.create(card_type: "enemy", effect: "hull", modifier: "-3", flavor_text: ".....", cost: "3000") }
+2.times { main_medium.cards.create(card_type: "enemy", effect: "hull", modifier: "-4", flavor_text: "There's a bounty on your head. Sorry.", cost: "4000") }
 3.times { main_medium.cards.create(card_type: "peace", effect: "none", modifier: "0", flavor_text: "Radar clear!", cost: "0") }
-2.times { main_medium.cards.create(card_type: "penalty", effect: "credit", modifier: "-500", flavor_text: "A service charge from ", cost: "0") }
+2.times { main_medium.cards.create(card_type: "penalty", effect: "credit", modifier: "-1500", flavor_text: "Space IRS.  It's a thing.", cost: "0") }
+2.times { main_medium.cards.create(card_type: "penalty", effect: "credit", modifier: "-500", flavor_text: "Toll charge for Jumpgate useage", cost: "1500") }
 1.times { main_medium.cards.create(card_type: "bonus", effect: "cargo", modifier: "2", flavor_text: "Blackmarket weaponry", cost: "500") }
 1.times { main_medium.cards.create(card_type: "bonus", effect: "cargo", modifier: "1", flavor_text: "Contraband holodiscs", cost: "200") }
 2.times { main_medium.cards.create(card_type: "bonus", effect: "cargo", modifier: "1", flavor_text: "Medical supplies", cost: "300") }
 2.times { main_medium.cards.create(card_type: "bonus", effect: "cargo", modifier: "3", flavor_text: "Replacement ship parts", cost: "700") }
 1.times { main_medium.cards.create(card_type: "bonus", effect: "cargo", modifier: "5", flavor_text: "An archaeological artifact!", cost: "2000") }
+
+
+main_hard = Deck.create(name: "main_hard", deck_type: "event")
+5.times { main_hard.cards.create(card_type: "enemy", effect: "hull", modifier: "-2", flavor_text: "a_space_pirate_01 appears!", cost: "2000") }
+7.times { main_hard.cards.create(card_type: "enemy", effect: "hull", modifier: "-3", flavor_text: ".....", cost: "3000") }
+5.times { main_hard.cards.create(card_type: "enemy", effect: "hull", modifier: "-4", flavor_text: "There's a bounty on your head. Sorry.", cost: "4000") }
+3.times { main_hard.cards.create(card_type: "enemy", effect: "hull", modifier: "-5", flavor_text: "Goodbye.", cost: "5000") }
+2.times { main_hard.cards.create(card_type: "bonus", effect: "cargo", modifier: "2", flavor_text: "Blackmarket weaponry", cost: "500") }
+2.times { main_hard.cards.create(card_type: "bonus", effect: "cargo", modifier: "1", flavor_text: "Contraband holodiscs", cost: "200") }
+2.times { main_hard.cards.create(card_type: "bonus", effect: "cargo", modifier: "1", flavor_text: "Medical supplies", cost: "300") }
+2.times { main_hard.cards.create(card_type: "bonus", effect: "cargo", modifier: "3", flavor_text: "Replacement ship parts", cost: "700") }
+2.times { main_hard.cards.create(card_type: "bonus", effect: "cargo", modifier: "5", flavor_text: "An archaeological artifact!", cost: "2000") }
+3.times { main_hard.cards.create(card_type: "penalty", effect: "credit", modifier: "-1500", flavor_text: "Space IRS.  It's a thing.", cost: "0") }
+2.times { main_hard.cards.create(card_type: "peace", effect: "none", modifier: "0", flavor_text: "Radar clear!", cost: "0") }
+
+
+
 
 
 buy = Deck.create(name: "buy", deck_type: "upgrades")

@@ -53,6 +53,7 @@
          @player.shield += 1
       end
       flash[:notice] = "Shield capacitor now at #{@player.shield} units"
+      session[:player_discard].push(card)
       session[:player_hand].delete(card)
     else
       flash[:notice] = "Not enough energy to charge shields"
@@ -125,7 +126,7 @@
         session[:player_discard].push(session[:buy_hand].delete(Card.find(params[:card])))
       elsif buy_card.card_type == "ship_upgrade"
         session[:ship][:"max_#{buy_card.effect}"] = buy_card.modifier.to_i
-        @player[:"#{buy_card.effect}"] = buy_card.modifier.to_i
+        # @player[:"#{buy_card.effect}"] = buy_card.modifier.to_i
         session[:buy_hand].delete(Card.find(params[:card]))
       end
     end
