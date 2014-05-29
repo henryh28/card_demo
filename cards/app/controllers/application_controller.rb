@@ -37,7 +37,8 @@ class ApplicationController < ActionController::Base
 
     easy_deck = Deck.find_by_name("main_easy").cards.shuffle!
     medium_deck = Deck.find_by_name("main_medium").cards.shuffle!
-    session[:event_deck] = easy_deck.drop(5) + medium_deck.drop(5)
+    hard_deck = Deck.find_by_name("main_hard").cards.shuffle!
+    session[:event_deck] = easy_deck.drop(5) + medium_deck.drop(5) + hard_deck.drop(5)
     session[:event_hand] = session[:event_deck].slice!(0..(@player.speed-1))
 
     session[:buy_deck] = Deck.find_by_name("buy").cards.shuffle!
