@@ -12,6 +12,20 @@ starting = Deck.create(name: "starting", deck_type: "player")
 4.times { starting.cards.create(card_type: "equipment", effect: "shield", modifier: "1", flavor_text: "Stock shield regenerator", cost: "0") }
 
 
+starter_buy = Deck.create(name:"starter_buys", deck_type: "starter")
+5.times { starter_buy.cards.create(card_type: "equipment", effect: "energy", modifier: "1", flavor_text: "Stock power plant", cost: "500") }
+5.times { starter_buy.cards.create(card_type: "equipment", effect: "attack", modifier: "1", flavor_text: "Stock coolant for weapons system", cost: "500") }
+5.times { starter_buy.cards.create(card_type: "equipment", effect: "shield", modifier: "1", flavor_text: "Stock shield regenerator", cost: "500") }
+
+1.times { starter_buy.cards.create(card_type: "ship_upgrade", effect: "hull", modifier: "5", flavor_text: "Starter hull", cost: "1000") }
+1.times { starter_buy.cards.create(card_type: "ship_upgrade", effect: "weapon", modifier: "1", efficiency: "1:1:0", flavor_text: "Starter weapon", cost: "1000")}
+1.times { starter_buy.cards.create(card_type: "ship_upgrade", effect: "shield", modifier: "1", efficiency: "1:1:7", flavor_text: "Starter shield", cost: "1000")}
+1.times { starter_buy.cards.create(card_type: "ship_upgrade", effect: "Engine", modifier: "2", efficiency: "1:5:10", flavor_text: "Starter engine", cost: "1000") }
+
+
+
+
+
 main_easy = Deck.create(name: "main_easy", deck_type: "event")
 10.times { main_easy.cards.create(card_type: "enemy", effect: "hull", modifier: "-1", flavor_text: "You cut me off!  Space road rage!", cost: "1000") }
 7.times { main_easy.cards.create(card_type: "enemy", effect: "hull", modifier: "-2", flavor_text: "a_space_pirate_01 appears!", cost: "2000") }
@@ -54,8 +68,9 @@ main_hard = Deck.create(name: "main_hard", deck_type: "event")
 2.times { main_hard.cards.create(card_type: "peace", effect: "none", modifier: "0", flavor_text: "Radar clear!", cost: "0") }
 
 
-
-
+# weapon efficiency format = heat generated : energy used : bonus to hit )
+# shield efficiency format = unit charged : energy used : shield capacity )
+# engine efficiency format = energy generated per turn : weapons battery : energy capacity )
 
 buy = Deck.create(name: "buy", deck_type: "upgrades")
 3.times { buy.cards.create(card_type: "equipment", effect: "attack", modifier: "2", flavor_text: "Liquid Hydrogen Coolant System", cost: "4000") }
@@ -65,13 +80,18 @@ buy = Deck.create(name: "buy", deck_type: "upgrades")
 3.times { buy.cards.create(card_type: "equipment", effect: "energy", modifier: "2", flavor_text: "Anti-Matter Power Plant", cost: "7000") }
 2.times { buy.cards.create(card_type: "equipment", effect: "energy", modifier: "3", flavor_text: "Unobtainium Converter", cost: "15000") }
 2.times { buy.cards.create(card_type: "equipment", effect: "energy", modifier: "4", flavor_text: "0.01 Point Energy Generator", cost: "25000") }
-3.times { buy.cards.create(card_type: "ship_upgrade", effect: "speed", modifier: "3", flavor_text: "General Neutronics Mk. VI", cost: "10000") }
-2.times { buy.cards.create(card_type: "ship_upgrade", effect: "speed", modifier: "4", flavor_text: "Interstellar Defense & Kinetics, T-38", cost: "20000") }
 3.times { buy.cards.create(card_type: "ship_upgrade", effect: "hull", modifier: "7", flavor_text: "Amorphic Meta-diamonoid reactive foam", cost: "7500") }
-2.times { buy.cards.create(card_type: "ship_upgrade", effect: "hull", modifier: "10", flavor_text: "Wishalloy Armored Hull Plating", cost: "15000") }
+2.times { buy.cards.create(card_type: "ship_upgrade", effect: "hull", modifier: "10", efficiency: "1",flavor_text: "Wishalloy Armored Hull Plating", cost: "15000") }
 3.times { buy.cards.create(card_type: "ship_upgrade", effect: "crew", modifier: "5", flavor_text: "Bunkbeds Deluxe", cost: "5000") }
 2.times { buy.cards.create(card_type: "ship_upgrade", effect: "crew", modifier: "6", flavor_text: "Space foldout couch", cost: "10000") }
 1.times { buy.cards.create(card_type: "ship_upgrade", effect: "crew", modifier: "7", flavor_text: "'Space-RV' Trailer Pod", cost: "15000") }
+2.times { buy.cards.create(card_type: "ship_upgrade", effect: "weapon", modifier: "2", efficiency: "2:1:3", flavor_text: "Particle Beam Projector", cost: "5500")}
+2.times { buy.cards.create(card_type: "ship_upgrade", effect: "weapon", modifier: "0", efficiency: "0:0:10", flavor_text: "Missile Launcher", cost: "3000")}
+2.times { buy.cards.create(card_type: "ship_upgrade", effect: "weapon", modifier: "3", efficiency: "3:2:2", flavor_text: "Angry cannon", cost: "12500")}
+2.times { buy.cards.create(card_type: "ship_upgrade", effect: "shield", modifier: "2", efficiency: "2:1:10", flavor_text: "Energy Barrier", cost: "7500")}
+2.times { buy.cards.create(card_type: "ship_upgrade", effect: "shield", modifier: "3", efficiency: "1:1:15", flavor_text: "Energy Disperser", cost: "17500")}
+2.times { buy.cards.create(card_type: "ship_upgrade", effect: "Engine", modifier: "3", efficiency: "3:10:15", flavor_text: "General Neutronics Mk. VI", cost: "10000") }
+2.times { buy.cards.create(card_type: "ship_upgrade", effect: "Engine", modifier: "4", efficiency: "2:15:20", flavor_text: "Astro T-38", cost: "15000") }
 
 
 penalty = Deck.create(name: "debuff", deck_type: "penalty")
