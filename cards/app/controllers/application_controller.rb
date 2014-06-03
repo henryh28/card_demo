@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     @player.shield = shipstat_hash["max_shield"]
     @player.crew = 3
     @player.fuel = shipstat_hash["max_fuel"]
-    @player.hardpoint = shipstat_hash["max_hardpoint"]
+    @player.hardpoint = 1
     @player.speed = shipstat_hash["max_speed"]
     @player.credit = 10000
     @player.cargo_bay = shipstat_hash["cargo_bay"]
@@ -108,7 +108,7 @@ class ApplicationController < ActionController::Base
 
   def event_tally
     session[:event_hand].each do |card|
-      if card.effect == "energy" || card.effect == "credit"
+      if card.effect == "energy"
         @player[:"#{card.effect}"] += card.modifier.to_i
         @player[:"#{card.effect}"] = 0 if @player[:"#{card.effect}"] < 1 && card.effect != "credit"
       elsif card.effect == "hull"
@@ -120,10 +120,14 @@ class ApplicationController < ActionController::Base
 
 # -------------------- Space Events -----------------
   def damage_ship(damage_amount)
-    if damage_amount.to_i.abs < @player.shield
-      @player.shield += damage_amount.to_i
+    if damage_amount.to_i.abs < @player.shield * @player.shield_efficiency
+      block_needed = 1
+      until block_needed * @player.shield_efficiency >= damage_amount.to_i.abs do
+        block_needed += 1
+      end
+      @player.shield -= block_needed
     else
-      hull_damage = damage_amount.to_i.abs - @player.shield
+      hull_damage = damage_amount.to_i.abs - (@player.shield * @player.shield_efficiency)
       @player.shield = 0
       @player.hull -= hull_damage
       hull_damage.times { session[:player_discard].push(session[:penalty_deck].slice!(0)) }
@@ -133,20 +137,16 @@ class ApplicationController < ActionController::Base
 
   def compute_attack
     enemy_strength = @event_card.modifier.to_i.abs
-    if @player.attack >= enemy_strength && power_check(enemy_strength)
-      @player.energy -= enemy_strength
-      @player.attack -= enemy_strength
+    shots_needed = (enemy_strength.to_f / @player.attack_efficiency).ceil
+    if @player.attack * @player.attack_efficiency >= enemy_strength && @player.energy >= shots_needed
+      @player.energy -= shots_needed
+      @player.attack -= shots_needed
       session[:event_discard].push(session[:event_hand].delete(@event_card))
       @player.credit += @event_card.cost.to_i
       flash[:notice] = "boom!"
     else
       flash[:notice] = "Not enough resources to attack enemy ship"
     end
-  end
-
-
-  def power_check(needed_power)
-    @player.energy >= needed_power
   end
 
 
@@ -234,6 +234,21 @@ class ApplicationController < ActionController::Base
       session[:player_discard].delete(session[:player_discard].find { |card| card.card_type == "malfunction"} )
     else session[:player_deck].any? { |card| card.card_type == "malfunction" }
       session[:player_deck].delete(session[:player_deck].find { |card| card.card_type == "malfunction"} )
+    end
+  end
+
+
+  def install_upgrade
+    if @buy_card.effect == "weapon"
+      @player.attack_efficiency = @buy_card.modifier.to_i
+    elsif @buy_card.effect == "shield"
+      @player.shield_efficiency = @buy_card.modifier.to_i
+    elsif @buy_card.effect == "engine"
+      session[:ship].max_speed = @buy_card.modifier.to_i
+    elsif @buy_card.effect == "hull"
+      session[:ship].max_hull = @buy_card.modifier.to_i
+    else
+      session[:ship][:"max_#{@buy_card.effect}"] = @buy_card.modifier.to_i
     end
   end
 
