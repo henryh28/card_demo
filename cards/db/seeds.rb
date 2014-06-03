@@ -12,6 +12,17 @@ starting = Deck.create(name: "starting", deck_type: "player")
 3.times { starting.cards.create(card_type: "equipment", effect: "shield", modifier: "1", flavor_text: "Stock shield regenerator", cost: "0") }
 
 
+# starter_buy = Deck.create(name:"starter_buys", deck_type: "starter")
+# 5.times { starter_buy.cards.create(card_type: "equipment", effect: "energy", modifier: "1", flavor_text: "Stock power plant", cost: "500") }
+# 5.times { starter_buy.cards.create(card_type: "equipment", effect: "attack", modifier: "1", flavor_text: "Stock coolant for weapons system", cost: "500") }
+# 5.times { starter_buy.cards.create(card_type: "equipment", effect: "shield", modifier: "1", flavor_text: "Stock shield regenerator", cost: "500") }
+
+# 1.times { starter_buy.cards.create(card_type: "ship_upgrade", effect: "hull", modifier: "5", flavor_text: "Starter hull", cost: "1000") }
+# 1.times { starter_buy.cards.create(card_type: "ship_upgrade", effect: "weapon", modifier: "1", efficiency: "1:1:0", flavor_text: "Starter weapon", cost: "1000")}
+# 1.times { starter_buy.cards.create(card_type: "ship_upgrade", effect: "shield", modifier: "1", efficiency: "1:1:7", flavor_text: "Starter shield", cost: "1000")}
+# 1.times { starter_buy.cards.create(card_type: "ship_upgrade", effect: "Engine", modifier: "2", efficiency: "1:5:10", flavor_text: "Starter engine", cost: "1000") }
+
+
 main_easy = Deck.create(name: "main_easy", deck_type: "event")
 10.times { main_easy.cards.create(card_type: "enemy", effect: "hull", modifier: "-1", flavor_text: "You cut me off! Space road rage!", cost: "1000") }
 7.times { main_easy.cards.create(card_type: "enemy", effect: "hull", modifier: "-2", flavor_text: "a_space_pirate_01 appears!", cost: "2000") }
