@@ -4,6 +4,7 @@ class CreateCards < ActiveRecord::Migration
       t.string :card_type
       t.string :effect
       t.string :modifier
+      t.string :efficiency
       t.string :flavor_text
       t.string :cost
 

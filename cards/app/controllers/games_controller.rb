@@ -116,17 +116,16 @@
 
   def buy
     @event_results = User.new
-    buy_card = Card.find(params[:card])
-    if buy_card.cost.to_i > @player.credit
+    @buy_card = Card.find(params[:card])
+    if @buy_card.cost.to_i > @player.credit
       flash[:notice] = "not enough cash. buy cancelled"
     else
-      @player.credit -= buy_card.cost.to_i
+      @player.credit -= @buy_card.cost.to_i
       flash[:notice] = "bought card"
-      if buy_card.card_type != "ship_upgrade"
+      if @buy_card.card_type != "ship_upgrade"
         session[:player_discard].push(session[:buy_hand].delete(Card.find(params[:card])))
-      elsif buy_card.card_type == "ship_upgrade"
-        session[:ship][:"max_#{buy_card.effect}"] = buy_card.modifier.to_i
-        # @player[:"#{buy_card.effect}"] = buy_card.modifier.to_i
+      elsif @buy_card.card_type == "ship_upgrade"
+        install_upgrade
         session[:buy_hand].delete(Card.find(params[:card]))
       end
     end

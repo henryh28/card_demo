@@ -35,6 +35,7 @@ done - turn tracker. game over by x turns. station visits count as turns
 
 done - shield charging requires energy.  Adds shield recharge service to stations.
 
+done - ship component screen. buyable upgrade to weapon, shield, engines
 
 
 
@@ -45,10 +46,6 @@ pending - implement missiles
 pending - add more variety to disaster cards in event deck
 
 pending - add bounty target/boss cards to event deck
-
-pending - starting customization screen. buy starting hand and equipment
-
-50% - ship component screen. buyable upgrade to weapon, shield, engines
 
 pending - tune deck. tune mechanic. tune all the things.
 
