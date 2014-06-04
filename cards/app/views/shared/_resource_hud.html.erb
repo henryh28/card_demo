@@ -5,12 +5,12 @@
         <th>Crew: <span class="resource_value"><%= @player.crew %> / <%= session[:ship].max_crew %></span></th>
       </tr>
       <tr>
-        <th>Weapons: <span class="resource_value"><%= @player.attack %> / <%= session[:ship].max_attack %></span></th>
-        <th>Speed: <span class="resource_value"><%= @player.speed %> / <%= session[:ship].max_speed %></span></th>
+        <th><span class="resource_value"><%= @player.attack_efficiency %></span> Weapons: <span class="resource_value"><%= @player.attack %> / <%= session[:ship].max_attack %></span></th>
+        <th>Cargo: <span class="resource_value"><%= @player.cargo %></span> / <span class="resource_value"><%= session[:ship].max_cargo %></span></th>
       </tr>
       <tr>
-        <th>Shield: <span class="resource_value"><%= @player.shield %> / <%= session[:ship].max_shield %></span></th>
-        <th>Cargo: <span class="resource_value"><%= @player.cargo %></span> / <span class="resource_value"><%= session[:ship].max_cargo %></span></th>
+        <th><span class="resource_value"><%= @player.shield_efficiency %></span> Shield: <span class="resource_value"><%= @player.shield %> / <%= session[:ship].max_shield %></span></th>
+        <th>Bounty: <span class="resource_value"><%= @player.vp %> / 100</span></th>
       </tr>
       <tr>
         <th>Energy: <span class="resource_value"><%= @player.energy %> / <%= session[:ship].max_energy %></span></th>

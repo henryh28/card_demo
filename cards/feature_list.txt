@@ -37,15 +37,14 @@ done - shield charging requires energy.  Adds shield recharge service to station
 
 done - ship component screen. buyable upgrade to weapon, shield, engines
 
+done - add more variety to disaster cards in event deck
 
+done - add bounty target/boss cards to event deck
 
 Pending
 ----------------------------------------------------------------
-pending - implement missiles
 
-pending - add more variety to disaster cards in event deck
 
-pending - add bounty target/boss cards to event deck
 
 pending - tune deck. tune mechanic. tune all the things.
 
@@ -60,4 +59,5 @@ pending - pilots with different skills/playstyles.  scout, barter, combat, engin
 pending - update and differentiate different card types.
    - dice rolls for combat?  simultaneous attack resolution or initiative.
 
+pending - implement missiles
 
