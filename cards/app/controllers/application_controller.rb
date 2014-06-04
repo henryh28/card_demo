@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     @player.fuel = shipstat_hash["max_fuel"]
     @player.hardpoint = 1
     @player.speed = shipstat_hash["max_speed"]
-    @player.credit = 10000
+    @player.credit = 5000
     @player.cargo_bay = shipstat_hash["cargo_bay"]
     @player.cargo = 0
     @player.cargo_bay = []
@@ -38,9 +38,13 @@ class ApplicationController < ActionController::Base
     easy_deck = Deck.find_by_name("main_easy").cards.shuffle!
     medium_deck = Deck.find_by_name("main_medium").cards.shuffle!
     hard_deck = Deck.find_by_name("main_hard").cards.shuffle!
+    bosses = Deck.find_by_name("bosses").cards.shuffle!
     session[:event_deck] = easy_deck.drop(5) + medium_deck.drop(5) + hard_deck.drop(5)
     session[:event_hand] = session[:event_deck].slice!(0..(@player.speed-1))
-
+    bosses.size.times do
+      |x| position = 1 + rand(20..50)
+      session[:event_deck].insert(-position, bosses[x-1] )
+    end
     session[:buy_deck] = Deck.find_by_name("buy").cards.shuffle!
     session[:buy_hand] = session[:buy_deck].slice!(0..2)
 
@@ -50,7 +54,7 @@ class ApplicationController < ActionController::Base
 
 
   def game_over?
-    if @player.credit > 50000
+    if @player.credit > 40000 || @player.vp >= 100
       session[:game_status] = "win"
     elsif @player.hull < 1 || @player.round >= session[:game_round_limit].to_i
       session[:game_status] = "lost"
@@ -108,9 +112,11 @@ class ApplicationController < ActionController::Base
 
   def event_tally
     session[:event_hand].each do |card|
-      if card.effect == "energy"
+      if card.effect == "energy" || card.effect == "credit"
         @player[:"#{card.effect}"] += card.modifier.to_i
         @player[:"#{card.effect}"] = 0 if @player[:"#{card.effect}"] < 1 && card.effect != "credit"
+      elsif card.effect == "time"
+        @player.round += 1
       elsif card.effect == "hull"
         damage_ship(card.modifier)
       end
@@ -143,6 +149,7 @@ class ApplicationController < ActionController::Base
       @player.attack -= shots_needed
       session[:event_discard].push(session[:event_hand].delete(@event_card))
       @player.credit += @event_card.cost.to_i
+      @player.vp += @event_card.modifier.to_i.abs
       flash[:notice] = "boom!"
     else
       flash[:notice] = "Not enough resources to attack enemy ship"
@@ -163,7 +170,7 @@ class ApplicationController < ActionController::Base
 
 
   def enemy_present?
-    session[:event_hand].any? { |card| card.card_type == "enemy"}
+    session[:event_hand].any? { |card| card.card_type == "enemy" || card.card_type == "boss"}
   end
 
 
@@ -245,6 +252,7 @@ class ApplicationController < ActionController::Base
       @player.shield_efficiency = @buy_card.modifier.to_i
     elsif @buy_card.effect == "engine"
       session[:ship].max_speed = @buy_card.modifier.to_i
+      @player.speed = @buy_card.modifier.to_i
     elsif @buy_card.effect == "hull"
       session[:ship].max_hull = @buy_card.modifier.to_i
     else

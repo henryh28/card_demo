@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(:version => 20140523162105) do
     t.integer  "cargo",             :default => 0
     t.text     "cargo_bay"
     t.integer  "round",             :default => 0
+    t.integer  "vp",                :default => 0
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
   end

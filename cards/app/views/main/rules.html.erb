@@ -1,4 +1,60 @@
-The rules will be here.<br>
+Thank you for participating in the development of this project.  Feedback may be sent do <%= mail_to "henry@henryhsu.net" %><br>
+
+<h2>Rules of the game</h2>
+
+<div class="rules">
+  You are the captain of a space vessel.  You start the game with a rickety ship, and a handful of cards which simulate the various components/functions of the ship subsystems.<br>
+
+  The goal of the game will differ depending on the scenario that is being played.  Listed below are the winning and losing conditions for the starter scenario.
+
+  <h3>Winning conditions</h3>
+    <ul>
+      <li class="rules_header">Accrue over 40,000 credit before time runs out</li>
+      <ul>
+        <li>Game is over by round 50</li><br>
+        <li>Every round of space event counts as one round</li><br>
+        <li>A visit to the space station counts as one round as well</li>
+      </ul><br>
+      <li class="rules_header">Accumulate over 100 Bounty points</li>
+      <ul>
+        <li>Every successful kill of an enemy ship will yeild points proportionate to the enemy's strength value</li>
+      </ul>
+    </ul>
+
+    <h3>Losing conditions</h3>
+      <ul>
+        <li class="rules_header">If your ship is reduced to zero or less hull points, your ship is destroyed and you have lost the game</li><br>
+        <li class="rules_header">Run out of time.  If you do not accumulate the 100 bounty points before the last round, the criminals and pirates have escaped and you have failed.
+      </ul>
 
 
-<%= link_to "Home", root_path %>
+    <h3>Game Mechanics</h3>
+      <ul>
+        <li class="rules_header">Space events(Enemies, Cargos, or negative events)</li>
+          <ul>
+            <li>Enemies have a strength value.  Your attack strength have to equal or exceed this value to defeat the target</li><br>
+            <li>Cargos may be picked up and stored in your cargo hold, up to the maximum capacity of your cargo hold.  Cargos may only be picked up if there are no enemies in the area preventing the retrieval of the cargo</li><br>
+            <li>Negative events will cause a loss of some type of resource</li>
+          </ul><br>
+
+        <li class="rules_header">Space Station Actions(Upgrades, Selling, Repairs)</li>
+          <ul>
+            <li>You may purchase upgrades to your ships and its subsystems here.</li>
+              <ul>
+                <li>'Equipment' type cards are equipments which help with the function of your ship. They will go into your discard pile and be drawn in future turns</li><br>
+                <li>'Ship_upgrade' type cards are purchases which offer a permanent boost in the performance of your ship and its various systems.  Once purchased, the upgrades are installed and these cards are trashed from the game</li><br>
+              </ul>
+            <li>Selling Cargo</li>
+              <ul>
+                <li>You may click on the cargos in your cargo bay to sell them when you're at a space station.  If they're clicked on outside of a station, they're jettisoned into space</li><br>
+              </ul>
+            <li>Repairs</li>
+              <ul>
+                <li>For a fee, you may repair damaged hulls, or recharge your energy and shield capacitors.  When repairing damaged hulls, an equivalent amount of malfunction cards sustained by taking damage will be removed from your card piles</li><br>
+              </ul>
+          </ul>
+      </ul>
+
+</div>
+
+<br><%= link_to "Home", root_path %>

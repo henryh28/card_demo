@@ -20,6 +20,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :cargo, :default => "0"
       t.text :cargo_bay
       t.integer :round, :default => "0"
+      t.integer :vp, :default => "0"
 
       t.timestamps
     end

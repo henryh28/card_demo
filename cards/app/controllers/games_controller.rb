@@ -35,7 +35,7 @@
   def event
     @event_results = User.new
     @event_card = Card.find(params[:card])
-    compute_attack if @event_card.card_type == "enemy"
+    compute_attack if @event_card.card_type == "enemy" || @event_card.card_type == "boss"
 
     respond_to do |format|
       format.js

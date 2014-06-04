@@ -17,6 +17,15 @@
   font-weight: bold;
 }
 
+h3 {
+  color: red;
+}
+
+.rules_header {
+  background: plum;
+  color: lightgoldenrodyellow;
+}
+
 ul {
   list-style: none;
 }
@@ -227,7 +236,7 @@ legend {
   float: right;
   position: absolute;
   top: 30px;
-  left: 230px;
+  left: 275px;
 }
 
 
