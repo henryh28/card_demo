@@ -1,4 +1,7 @@
 <div class="system_message">
-  <%= flash.now[:notice] %>
-  <% flash.clear %>
+  <fieldset>
+    <legend>System Message</legend>
+        <span><%= flash.now[:notice] %></span>
+        <% flash.clear %>
+  </fieldset>
 </div>

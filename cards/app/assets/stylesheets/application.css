@@ -39,13 +39,6 @@ ul a:hover {
   color: #536DBA;
 }
 
-.menu {
-  border: 1px solid cornflowerblue;
-  margin-left: 10%;
-  margin-right: 10%;
-  padding: 25px;
-}
-
 .footer {
   text-align: center;
   position: absolute;
@@ -66,39 +59,27 @@ td {
   border: 1px solid black;
 }
 
-.player_area {
-  clear: both;
-  border: 3px solid cornflowerblue;
-  padding: 25px;
-}
-
-.event_area {
-  border: 3px solid cornflowerblue;
-  padding: 25px;
-  width: 40%;
-  float: left;
-}
-
-.station_services {
+fieldset {
   border: 3px solid cornflowerblue;
   padding: 15px;
-  width: 45%;
-  float: left;
-  position: relative;
+  text-align: center;
 }
 
-.buy_area {
-  border: 3px solid cornflowerblue;
-  padding: 25px;
-  width: 40%;
-  float: right;
+
+.services {
+  margin: 0 auto;
 }
 
-.cargo_area {
-  border: 3px solid cornflowerblue;
-  padding: 25px;
-  clear: both;
+.services th {
+  background-color: whitesmoke;
+  padding: 10px;
 }
+
+.services a {
+  color: slategray;
+  text-decoration: none;
+}
+
 
 .hud {
   border: 3px solid cornflowerblue;
@@ -150,8 +131,12 @@ td {
 
 .resource_hud {
   color: darkseagreen;
-  width: 90%;
-  margin-left: 5%;
+  text-align: center;
+}
+
+
+.resource_hud table {
+  margin: 0 auto;
 }
 
 .resource_hud th {
@@ -159,7 +144,7 @@ td {
   padding: 10px;
 }
 
-.resource_value {
+.resource_hud span {
   color: orchid;
 }
 
@@ -224,19 +209,9 @@ legend {
   top:1px;
 }
 
-.system_message {
-  clear: both;
+.system_message span {
   font-weight: bold;
   color: red;
-}
-
-
-.services {
-  display: inline-block;
-  float: right;
-  position: absolute;
-  top: 30px;
-  left: 275px;
 }
 
 

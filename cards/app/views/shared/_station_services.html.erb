@@ -1,10 +1,13 @@
 <fieldset class="station_services">
   <legend>Station Services</legend>
-    <%= render "shared/resource_hud" %>
-    <ul class="services">
-      <li><%= link_to "Repair Hull (500/hull)", games_station_path(:service => "repair") %></li><br>
-      <li><%= link_to "Hire Crew Member (3000)", games_station_path(:service => "hire") %></li><br>
-      <li><%= link_to "Recharge energy (100/unit)", games_station_path(:service => "recharge") %></li><br>
-      <li><%= link_to "Recharge shield (250/unit)", games_station_path(:service => "shield") %></li><br>
-    </ul>
+    <table class="services">
+    <tr>
+      <th><%= link_to "Repair Hull (500/hull)", games_station_path(:service => "repair") %></th>
+      <th><%= link_to "Hire Crew Member (3000)", games_station_path(:service => "hire") %></th>
+    </tr>
+    <tr>
+      <th><%= link_to "Recharge energy (100/unit)", games_station_path(:service => "recharge") %></th>
+      <th><%= link_to "Recharge shield (250/unit)", games_station_path(:service => "shield") %></th>
+    </tr>
+    </table>
 </fieldset>
