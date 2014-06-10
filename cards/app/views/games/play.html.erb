@@ -1,15 +1,15 @@
-<%= render "shared/event_deck" %>
-<%= render "shared/hud" %>
-<%= render "shared/player_area" %>
-<%= render "shared/cargo_bay" %>
-
 <%= form_tag(games_play_path) do %>
-  <%= select_tag "speed", options_for_select( 1..@player.speed, @player.speed ) %>
+  <%= render "shared/resource_hud" %>
+  <%= render "shared/system_message" %>
+  <%= render "shared/event_deck" %>
+  <%= render "shared/player_area" %>
+  <%= render "shared/cargo_bay" %>
+
   <%= submit_tag "Play Hand", :class => "link_button" %>
+<% end %>
   <%= link_to "Station", games_station_path, :class => "link_button" %>
   <%= link_to "Home", root_path, class: "link_button", data: { confirm: "Quit game?" }%>
-  Current turn: <%= @player.round %> / <%= session[:game_round_limit] %>
-<% end %>
 
-<%= render "shared/system_message" %><br>
 <%#= render "shared/dev_debug" %>
+Deck size: <%= session[:player_deck].size %> /
+Discards: <%= session[:player_discard].size %>

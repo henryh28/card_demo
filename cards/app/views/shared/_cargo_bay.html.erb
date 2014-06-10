@@ -1,5 +1,5 @@
 <fieldset class="cargo_area">
-  <legend>Cargo Bay   <%= @player.cargo %> / <%= session[:ship].max_cargo %></legend>
+  <legend>Cargo Bay <%= @player.cargo %> / <%= session[:ship].max_cargo %></legend>
   <% @player.cargo_bay.each do |cargo| %>
 
     <% if session[:location] == "space" %>

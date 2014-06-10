@@ -13,6 +13,7 @@
 
   def play
     round_housekeeping
+    @player.speed = params[:speed].to_i
     redirect_to games_process_round_path
   end
 

@@ -1,24 +1,18 @@
   <div class="resource_hud">
     <table>
       <tr>
-        <th>Hull: <span class="resource_value"><%= @player.hull %> / <%= session[:ship].max_hull %></span></th>
-        <th>Crew: <span class="resource_value"><%= @player.crew %> / <%= session[:ship].max_crew %></span></th>
+        <th>Hull: <span><%= @player.hull %> / <%= session[:ship].max_hull %></span></th>
+        <th><span><%= @player.attack_efficiency %></span> Weapons: <span><%= @player.attack %> / <%= session[:ship].max_attack %></span></th>
+        <th><span><%= @player.shield_efficiency %></span> Shield: <span><%= @player.shield %> / <%= session[:ship].max_shield %></span></th>
+        <th>Energy: <span><%= @player.energy %> / <%= session[:ship].max_energy %></span></th>
+        <th>Credit: <span><%= @player.credit %></span></th>
       </tr>
       <tr>
-        <th><span class="resource_value"><%= @player.attack_efficiency %></span> Weapons: <span class="resource_value"><%= @player.attack %> / <%= session[:ship].max_attack %></span></th>
-        <th>Cargo: <span class="resource_value"><%= @player.cargo %></span> / <span class="resource_value"><%= session[:ship].max_cargo %></span></th>
-      </tr>
-      <tr>
-        <th><span class="resource_value"><%= @player.shield_efficiency %></span> Shield: <span class="resource_value"><%= @player.shield %> / <%= session[:ship].max_shield %></span></th>
-        <th>Bounty: <span class="resource_value"><%= @player.vp %> / 100</span></th>
-      </tr>
-      <tr>
-        <th>Energy: <span class="resource_value"><%= @player.energy %> / <%= session[:ship].max_energy %></span></th>
-        <th>Draw pile: <span class="resource_value"><%= session[:player_deck].size %></span></th>
-      </tr>
-      <tr>
-        <th>Credit: <span class="resource_value"><%= @player.credit %></span></th>
-        <th>Discards: <span class="resource_value"><%= session[:player_discard].size %></span></th>
+        <th>Crew: <span><%= @player.crew %> / <%= session[:ship].max_crew %></span></th>
+        <th>Cargo: <span><%= @player.cargo %></span> / <span><%= session[:ship].max_cargo %></span></th>
+        <th>Bounty: <span><%= @player.vp %> / 100</span></th>
+        <th>Turn: <span><%= @player.round %> / <%= session[:game_round_limit] %></span></th>
+        <th>Speed: <span><%= select_tag "speed", options_for_select( 1..session[:ship].max_speed, @player.speed ) %></span></th>
       </tr>
     </table>
   </div>

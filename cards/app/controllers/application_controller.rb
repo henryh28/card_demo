@@ -252,7 +252,7 @@ class ApplicationController < ActionController::Base
       @player.shield_efficiency = @buy_card.modifier.to_i
     elsif @buy_card.effect == "engine"
       session[:ship].max_speed = @buy_card.modifier.to_i
-      @player.speed = @buy_card.modifier.to_i
+      # @player.speed = @buy_card.modifier.to_i
     elsif @buy_card.effect == "hull"
       session[:ship].max_hull = @buy_card.modifier.to_i
     else
