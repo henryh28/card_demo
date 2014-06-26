@@ -6,6 +6,11 @@
         <th><span><%= @player.shield_efficiency %></span> Shield: <span><%= @player.shield %> / <%= session[:ship].max_shield %></span></th>
         <th>Energy: <span><%= @player.energy %> / <%= session[:ship].max_energy %></span></th>
         <th>Credit: <span><%= @player.credit %></span></th>
+        <th><% if session[:location] == "station" %>
+              <%= link_to "Leave", games_play_path, method: :post, :class => "link_button" %>
+              <% else %>
+                <%= submit_tag "Play Hand", :class => "link_button" %>
+              <% end %></th>
       </tr>
       <tr>
         <th>Crew: <span><%= @player.crew %> / <%= session[:ship].max_crew %></span></th>

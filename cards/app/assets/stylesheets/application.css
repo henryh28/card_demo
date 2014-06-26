@@ -12,6 +12,15 @@
  *= require_tree .
  */
 
+body {
+  background-color: black;
+  color: azure;
+}
+
+a[href^="mailto:"] {
+  color: gold;
+}
+
 .heading {
   border: 1px solid plum;
   font-weight: bold;
@@ -22,15 +31,15 @@ h3 {
 }
 
 .rules_header {
-  background: plum;
-  color: lightgoldenrodyellow;
+  background: beige;
+  color: royalblue;
 }
 
 ul {
   list-style: none;
 }
 
-ul a {
+ul a:visited, a:link {
   text-decoration: none;
   color: #5C85FF;
 }
@@ -60,18 +69,20 @@ td {
 }
 
 fieldset {
-  border: 3px solid cornflowerblue;
+  color: azure;
+  border: 3px solid azure;
   padding: 15px;
   text-align: center;
 }
 
 
 .services {
+  background-color: whitesmoke;
   margin: 0 auto;
 }
 
 .services th {
-  background-color: whitesmoke;
+  border: 1px solid cadetblue;
   padding: 10px;
 }
 
@@ -81,17 +92,10 @@ fieldset {
 }
 
 
-.hud {
-  border: 3px solid cornflowerblue;
-  padding: 25px;
-  width: 40%;
-  float: right;
-  position: relative;
-}
-
 .player_card, .buyable_cards, .event_cards,
 .enemy_cards, .cargo_cards, .space_cargos,
-.station_cargos, .shield_charger_card {
+.station_cargos, .shield_charger_card, .trim_card {
+  color: black;
   display: inline-block;
   position: relative;
   border: 1px solid lightslategray;
@@ -136,16 +140,17 @@ fieldset {
 
 
 .resource_hud table {
+  background-color: rgba(0,0,0,0.5);
   margin: 0 auto;
 }
 
 .resource_hud th {
-  background-color: aliceblue;
-  padding: 10px;
+  padding: 5px;
+  border: 1px solid linen;
 }
 
 .resource_hud span {
-  color: orchid;
+  color: linen;
 }
 
 .event_summary {
@@ -185,33 +190,37 @@ legend {
   text-indent:0;
   border:1px solid #a3d3ff;
   display:inline-block;
-  color:#ffffff;
+  color:black;
   font-family:Verdana;
-  font-size:15px;
+  font-size:12px;
   font-weight:bold;
   font-style:normal;
-  height:40px;
-  line-height:40px;
-  width:100px;
+  height:20px;
+  line-height:20px;
+  width:80px;
   text-decoration:none;
   text-align:center;
   text-shadow:1px 1px 0px #4274a6;
   float: left;
-  margin-left: 25px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
+
 .link_button:hover {
   background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #7bb9f7), color-stop(1, #c2e1ff) );
   background:-moz-linear-gradient( center top, #7bb9f7 5%, #c2e1ff 100% );
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7bb9f7', endColorstr='#c2e1ff');
   background-color:#7bb9f7;
-}.link_button:active {
+}
+
+.link_button:active {
   position:relative;
   top:1px;
 }
 
 .system_message span {
   font-weight: bold;
-  color: red;
+  color: orangered;
 }
 
 

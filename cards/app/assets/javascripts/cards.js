@@ -38,6 +38,11 @@ function bindStationEvent(){
     event.preventDefault();
     sellCargo(this);
   })
+
+  $('.trim_card').click(function(event){
+    event.preventDefault();
+    trimCard(this);
+  })
 };
 
 
@@ -97,6 +102,16 @@ function sellCargo(card) {
   var cardId = $(card).find("#card_id").val();
   $.ajax({
     url: '/games/sell',
+    type: 'get',
+    data: { card: cardId }
+  })
+}
+
+
+function trimCard(card) {
+  var cardId = $(card).find("#card_id").val();
+  $.ajax({
+    url: '/games/trim',
     type: 'get',
     data: { card: cardId }
   })

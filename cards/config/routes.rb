@@ -18,5 +18,6 @@ Cards::Application.routes.draw do
   get "games/sell", :to => "games#sell"
   get "games/process_round", :to => "games#process_round"
   get "games/shield_up", :to => "games#shield_up"
+  get "games/trim", :to => "games#trim"
 
 end

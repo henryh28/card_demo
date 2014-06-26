@@ -67,6 +67,7 @@ class ApplicationController < ActionController::Base
   def round_housekeeping
     discard_cards
     session[:location]="space"
+    session[:tuned]="available"
     current_speed = params[:speed] ? params[:speed].to_i : @player.speed
 
     draw_new_cards("player_deck", "player_discard", "player_hand", @player.crew)
@@ -136,7 +137,8 @@ class ApplicationController < ActionController::Base
       hull_damage = damage_amount.to_i.abs - (@player.shield * @player.shield_efficiency)
       @player.shield = 0
       @player.hull -= hull_damage
-      hull_damage.times { session[:player_discard].push(session[:penalty_deck].slice!(0)) }
+      extra_penalty = (hull_damage / @player.hull.to_f).round
+      (hull_damage + extra_penalty).times { session[:player_discard].push(session[:penalty_deck].slice!(0)) }
     end
   end
 
@@ -185,7 +187,6 @@ class ApplicationController < ActionController::Base
    if @player.hull < session[:ship].max_hull && @player.credit >= 500
       @player.credit -= 500
       @player.hull += 1
-      remove_malfunction_card
       flash[:notice] = "Repaired 1 hull for 500 credits"
     elsif @player.hull >= session[:ship].max_hull
       flash[:notice] = "Hull at maximum"
@@ -235,12 +236,22 @@ class ApplicationController < ActionController::Base
 
 
   def remove_malfunction_card
-    if session[:player_hand].any? { |card| card.card_type == "malfunction" }
+    if session[:player_hand].any? { |card| card.card_type == "malfunction" } && @player.credit >= 250
       session[:player_hand].delete(session[:player_hand].find { |card| card.card_type == "malfunction"} )
-    elsif session[:player_discard].any? { |card| card.card_type == "malfunction" }
+      @player.credit -= 250
+      flash[:notice] = "Repairing internal systems"
+    elsif session[:player_discard].any? { |card| card.card_type == "malfunction" } && @player.credit >= 250
       session[:player_discard].delete(session[:player_discard].find { |card| card.card_type == "malfunction"} )
-    else session[:player_deck].any? { |card| card.card_type == "malfunction" }
+      @player.credit -= 250
+      flash[:notice] = "Repairing internal systems"
+    elsif session[:player_deck].any? { |card| card.card_type == "malfunction" } && @player.credit >= 250
       session[:player_deck].delete(session[:player_deck].find { |card| card.card_type == "malfunction"} )
+      @player.credit -= 250
+      flash[:notice] = "Repairing internal systems"
+    elsif @player.credit < 250
+      flash[:notice] = "Insufficient credit for repair"
+    else
+      flash[:notice] = "All internal systems nominal"
     end
   end
 
@@ -252,7 +263,6 @@ class ApplicationController < ActionController::Base
       @player.shield_efficiency = @buy_card.modifier.to_i
     elsif @buy_card.effect == "engine"
       session[:ship].max_speed = @buy_card.modifier.to_i
-      # @player.speed = @buy_card.modifier.to_i
     elsif @buy_card.effect == "hull"
       session[:ship].max_hull = @buy_card.modifier.to_i
     else

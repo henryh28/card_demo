@@ -1,12 +1,8 @@
-<fieldset class="player_area">
-  <legend>Ship Resources</legend>
-  <div class="player_hand">
-    <% session[:player_hand].each do |card| %>
-      <% if card.effect == "shield" %>
-        <div class="shield_charger_card">
-      <% else %>
-        <div class="player_card">
-      <% end %>
+<fieldset class="mechanic_area">
+  <legend>Discards</legend>
+  <div class="player_discard">
+    <% session[:player_discard].each do |card| %>
+        <div class="trim_card">
         <div class="card_type"><%= card.card_type %></div>
         <div class="card_effect"><%= card.effect %></div>
         <div class="card_modifier"><%= card.modifier %></div><br>
