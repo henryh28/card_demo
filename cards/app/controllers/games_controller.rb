@@ -108,6 +108,10 @@
         recharge_energy
       elsif params[:service] == "shield"
         recharge_shield
+      elsif params[:service] == "malfunction"
+        remove_malfunction_card
+      elsif params[:service] == "tuning"
+        session[:tuned] = "in_progress"
       else
         flash[:notice] = "Docked at outpost."
       end
@@ -148,5 +152,21 @@
       format.js
     end
   end
+
+  def trim
+    if @player.credit >= 1000
+      @player.credit -= 1000
+      session[:player_discard].delete(Card.find(params[:card]))
+      session[:tuned] = "completed"
+    else
+      flash[:notice] = "Not enough money for service"
+    end
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+
 
 end

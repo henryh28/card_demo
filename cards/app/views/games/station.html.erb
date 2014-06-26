@@ -2,9 +2,8 @@
 <%= render "shared/system_message" %>
 <%= render "shared/buy_deck" %>
 <%= render "shared/station_services" %>
+<%= render "shared/tuning" if session[:tuned] == "in_progress" %>
 <%= render "shared/cargo_bay" %>
-
-<%= link_to "Leave", games_play_path, method: :post, :class => "link_button" %>
 
 <%= link_to "Home", root_path, class: "link_button", data: { confirm: "Quit game?" }%>
 Current turn: <%= @player.round %> / <%= session[:game_round_limit] %>

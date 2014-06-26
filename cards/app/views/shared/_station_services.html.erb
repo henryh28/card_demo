@@ -3,11 +3,16 @@
     <table class="services">
     <tr>
       <th><%= link_to "Repair Hull (500/hull)", games_station_path(:service => "repair") %></th>
+      <th><%= link_to "Repair malfunctions (250/per)", games_station_path(:service => "malfunction") %></th>
       <th><%= link_to "Hire Crew Member (3000)", games_station_path(:service => "hire") %></th>
     </tr>
     <tr>
       <th><%= link_to "Recharge energy (100/unit)", games_station_path(:service => "recharge") %></th>
       <th><%= link_to "Recharge shield (250/unit)", games_station_path(:service => "shield") %></th>
+      <th><% if session[:tuned] == "available" %>
+            <%= link_to "Ship tuning (1000)", games_station_path(:service => "tuning") %>
+          <% end %></th>
     </tr>
+
     </table>
 </fieldset>

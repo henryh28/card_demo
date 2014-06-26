@@ -75,7 +75,7 @@ buy = Deck.create(name: "buy", deck_type: "upgrades")
 3.times { buy.cards.create(card_type: "equipment", effect: "energy", modifier: "2", flavor_text: "Anti-Matter Power Plant", cost: "4000") }
 2.times { buy.cards.create(card_type: "equipment", effect: "energy", modifier: "3", flavor_text: "Unobtainium Converter", cost: "10000") }
 2.times { buy.cards.create(card_type: "equipment", effect: "energy", modifier: "4", flavor_text: "0.01 Point Energy Generator", cost: "15000") }
-3.times { buy.cards.create(card_type: "ship_upgrade", effect: "hull", modifier: "7", flavor_text: "Amorphic Meta-diamonoid reactive foam", cost: "4000") }
+3.times { buy.cards.create(card_type: "ship_upgrade", effect: "hull", modifier: "7", flavor_text: "Amorphic Meta-diamonoid reactive foam, with raspberry scent", cost: "4000") }
 2.times { buy.cards.create(card_type: "ship_upgrade", effect: "hull", modifier: "10", efficiency: "1",flavor_text: "Wishalloy Armored Hull Plating", cost: "10000") }
 3.times { buy.cards.create(card_type: "ship_upgrade", effect: "crew", modifier: "5", flavor_text: "Bunkbeds Deluxe", cost: "3500") }
 2.times { buy.cards.create(card_type: "ship_upgrade", effect: "crew", modifier: "6", flavor_text: "Space foldout couch", cost: "7500") }
@@ -90,5 +90,5 @@ buy = Deck.create(name: "buy", deck_type: "upgrades")
 
 
 penalty = Deck.create(name: "debuff", deck_type: "penalty")
-20.times { penalty.cards.create(card_type: "malfunction", effect: "none", modifier: "0", flavor_text: "It's repairable.... Maybe?", cost: "2000") }
+35.times { penalty.cards.create(card_type: "malfunction", effect: "none", modifier: "0", flavor_text: "It's repairable.... Maybe?", cost: "2000") }
 
